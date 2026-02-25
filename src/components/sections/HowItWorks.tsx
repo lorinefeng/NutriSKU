@@ -40,7 +40,7 @@ export function HowItWorks() {
     ];
 
     return (
-        <section id="how-it-works" className="relative py-32 overflow-hidden">
+        <section id="how-it-works" className="relative py-24 md:py-28 overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0 bg-[var(--color-deep-alt)]" />
 
@@ -57,18 +57,18 @@ export function HowItWorks() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={transition}
-                    className="text-center max-w-3xl mx-auto mb-24"
+                    className="text-center max-w-3xl mx-auto mb-16"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(200,169,126,0.15)] text-[#c8a97e] text-sm mb-6">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[rgba(200,169,126,0.15)] text-[#c8a97e] text-xs md:text-sm mb-4">
                         <Globe className="w-3.5 h-3.5" />
                         <span>{t("howItWorks.badge")}</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--color-text-primary)] mb-6">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--color-text-primary)] mb-4">
                         {t("howItWorks.title.pre")}
                         <span className="gradient-text-gold">{t("howItWorks.title.brand")}</span>
                         {t("howItWorks.title.post")}
                     </h2>
-                    <p className="text-lg md:text-xl text-[var(--color-text-secondary)]">{t("howItWorks.subtitle")}</p>
+                    <p className="text-base md:text-lg text-[var(--color-text-secondary)]">{t("howItWorks.subtitle")}</p>
                 </motion.div>
 
                 {/* Steps */}
@@ -85,17 +85,17 @@ export function HowItWorks() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ ...transition, delay: index * 0.12 }}
-                            className={`relative mb-14 last:mb-0 lg:flex lg:items-center ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                            className={`relative mb-10 last:mb-0 lg:flex lg:items-center ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                                 }`}
                         >
                             {/* Card */}
                             <div className={`lg:w-[calc(50%-32px)] ${index % 2 === 0 ? "lg:pr-8 lg:text-right" : "lg:pl-8 lg:text-left"}`}>
-                                <div className="group relative p-6 md:p-7 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[rgba(200,169,126,0.22)] transition-all duration-500">
+                                <div className="group relative p-5 md:p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[rgba(200,169,126,0.22)] transition-all duration-500">
                                     {/* Step badge */}
                                     <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[rgba(200,169,126,0.15)] text-[10px] font-bold text-[#c8a97e] mb-4 tracking-widest">
                                         STEP {step.number}
                                     </div>
-                                    <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2.5 group-hover:text-[#dfc9a8] transition-colors">
+                                    <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2 group-hover:text-[#dfc9a8] transition-colors">
                                         {step.title}
                                     </h3>
                                     <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed group-hover:text-[var(--color-text-muted)] transition-colors">
@@ -134,16 +134,16 @@ export function HowItWorks() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ ...transition, delay: 0.4 }}
-                    className="text-center mt-20"
+                    className="text-center mt-12"
                 >
-                    <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-glass-light)]">
+                    <div className="inline-flex flex-col items-center gap-3 p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-glass-light)]">
                         <div className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-[#c8a97e] animate-gold-pulse" />
                             <span className="text-[var(--color-text-secondary)] text-sm">
                                 {t("howItWorks.cta.setup")}
                             </span>
                         </div>
-                        <p className="text-[var(--color-text-muted)]">{t("howItWorks.cta.question")}</p>
+                        <p className="text-sm text-[var(--color-text-muted)]">{t("howItWorks.cta.question")}</p>
                         <a
                             href="#"
                             className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#c8a97e] to-[#b8956a] text-[#0c0c10] font-semibold hover:shadow-[0_0_30px_rgba(200,169,126,0.25)] transition-all duration-300"

@@ -33,7 +33,7 @@ export function Hero() {
     ];
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-8">
             {/* Subtle background */}
             <div className="absolute inset-0 z-0">
                 {/* Fine grain texture overlay */}
@@ -61,7 +61,7 @@ export function Hero() {
                     {/* Badge */}
                     <motion.div
                         variants={itemVariants}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(200,169,126,0.2)] text-[#c8a97e] text-sm font-medium mb-8"
+                        className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[rgba(200,169,126,0.2)] text-[#c8a97e] text-xs md:text-sm font-medium mb-6"
                     >
                         <span className="w-1.5 h-1.5 rounded-full bg-[#c8a97e] animate-gold-pulse" />
                         <span>{t("hero.badge")}</span>
@@ -70,17 +70,17 @@ export function Hero() {
                     {/* Headline */}
                     <motion.h1
                         variants={itemVariants}
-                        className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.1]"
+                        className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]"
                     >
                         <span className="text-[var(--color-text-primary)]">{t("hero.title.line1")}</span>
                         <br />
-                        <span className="gradient-text-hero">{t("hero.title.highlight")}</span>
+                        <span className="gradient-text-hero hero-highlight">{t("hero.title.highlight")}</span>
                     </motion.h1>
 
                     {/* Subtitle */}
                     <motion.p
                         variants={itemVariants}
-                        className="text-lg md:text-xl text-[var(--color-text-secondary)] mb-12 max-w-2xl mx-auto leading-relaxed"
+                        className="text-base md:text-lg text-[var(--color-text-secondary)] mb-8 max-w-2xl mx-auto leading-relaxed"
                     >
                         {t("hero.subtitle")}
                     </motion.p>
@@ -88,7 +88,7 @@ export function Hero() {
                     {/* CTA */}
                     <motion.div
                         variants={itemVariants}
-                        className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full mb-16"
+                        className="flex flex-col sm:flex-row gap-3 items-center justify-center w-full mb-10"
                     >
                         <GlowButton variant="gold" size="lg" className="w-full sm:w-auto group">
                             {t("hero.cta.primary")}
@@ -100,12 +100,12 @@ export function Hero() {
                     </motion.div>
 
                     {/* Stats */}
-                    <motion.div variants={itemVariants} className="grid grid-cols-3 gap-8 md:gap-16">
+                    <motion.div variants={itemVariants} className="grid grid-cols-3 gap-6 md:gap-12">
                         {stats.map((stat, i) => (
                             <div key={i} className="text-center group">
                                 <div className="flex items-center justify-center gap-2 mb-2">
                                     <stat.icon className="w-4 h-4 text-[#c8a97e] opacity-60 group-hover:opacity-100 transition-opacity" />
-                                    <span className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)]">{stat.value}</span>
+                                    <span className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)]">{stat.value}</span>
                                 </div>
                                 <span className="text-xs text-[var(--color-text-muted)] group-hover:text-[var(--color-text-secondary)] transition-colors">{stat.label}</span>
                             </div>
@@ -118,12 +118,12 @@ export function Hero() {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.9 }}
-                    className="mt-20 relative w-full max-w-3xl mx-auto"
+                    className="mt-12 relative w-full max-w-3xl mx-auto"
                 >
                     {/* Subtle glow */}
                     <div className="absolute -inset-1 bg-gradient-to-r from-[rgba(200,169,126,0.1)] via-[rgba(200,169,126,0.05)] to-[rgba(200,169,126,0.1)] blur-2xl rounded-2xl" />
 
-                    <div className="relative glass rounded-2xl p-6 md:p-8">
+                    <div className="relative glass rounded-2xl p-5 md:p-6">
                         {/* Header */}
                         <div className="flex items-center justify-between mb-5 pb-4 border-b border-white/[0.04]">
                             <div className="flex items-center gap-2">

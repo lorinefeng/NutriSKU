@@ -30,7 +30,7 @@ export function BrandMatrix() {
     const rows = [brands.slice(0, 4), brands.slice(4, 8), brands.slice(8, 12)];
 
     return (
-        <section id="client-matrix" className="relative py-20 md:py-24 overflow-hidden">
+        <section id="client-matrix" className="relative py-16 md:py-20 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-deep)] via-[var(--color-void)] to-[var(--color-deep-alt)]" />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(200,169,126,0.018)_1px,transparent_1px),linear-gradient(90deg,rgba(200,169,126,0.018)_1px,transparent_1px)] bg-[size:72px_72px]" />
             <div className="absolute top-16 -left-28 h-72 w-72 rounded-full bg-[rgba(200,169,126,0.06)] blur-3xl" />
@@ -42,16 +42,16 @@ export function BrandMatrix() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
                     transition={transition}
-                    className="text-center max-w-3xl mx-auto mb-12"
+                    className="text-center max-w-3xl mx-auto mb-8"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(200,169,126,0.2)] text-[#c8a97e] text-sm mb-5">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[rgba(200,169,126,0.2)] text-[#c8a97e] text-xs md:text-sm mb-4">
                         <BriefcaseBusiness className="w-3.5 h-3.5" />
                         <span>{t("brandMatrix.badge")}</span>
                     </div>
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--color-text-primary)] mb-4">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-[var(--color-text-primary)] mb-3">
                         {t("brandMatrix.title")}
                     </h2>
-                    <p className="text-base md:text-lg text-[var(--color-text-secondary)]">
+                    <p className="text-sm md:text-base text-[var(--color-text-secondary)]">
                         {t("brandMatrix.subtitle")}
                     </p>
                 </motion.div>
@@ -101,20 +101,20 @@ export function BrandMatrix() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ ...transition, delay: 0.12 }}
-                    className="mt-12 border-t border-[var(--color-border)] pt-7 grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
+                    className="mt-8 border-t border-[var(--color-border)] pt-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center"
                 >
                     <div>
-                        <div className="text-4xl md:text-5xl font-semibold text-[var(--color-text-primary)] mb-2">10+</div>
+                        <div className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] mb-1.5">10+</div>
                         <div className="text-sm md:text-base text-[var(--color-text-secondary)]">{t("brandMatrix.stat.brands")}</div>
                     </div>
                     <div>
-                        <div className="text-4xl md:text-5xl font-semibold text-[var(--color-text-primary)] mb-2">
+                        <div className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] mb-1.5">
                             {locale === "zh" ? "¥50亿+" : "¥5B+"}
                         </div>
                         <div className="text-sm md:text-base text-[var(--color-text-secondary)]">{t("brandMatrix.stat.gmv")}</div>
                     </div>
                     <div>
-                        <div className="text-4xl md:text-5xl font-semibold text-[var(--color-text-primary)] mb-2">
+                        <div className="text-3xl md:text-4xl font-semibold text-[var(--color-text-primary)] mb-1.5">
                             {locale === "zh" ? "100万+" : "1M+"}
                         </div>
                         <div className="text-sm md:text-base text-[var(--color-text-secondary)]">{t("brandMatrix.stat.skus")}</div>

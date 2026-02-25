@@ -46,7 +46,7 @@ export function Features() {
     ];
 
     return (
-        <section id="features" className="relative py-32 overflow-hidden">
+        <section id="features" className="relative py-24 md:py-28 overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-void)] via-[var(--color-surface)] to-[var(--color-void)]" />
 
@@ -66,20 +66,20 @@ export function Features() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={transition}
-                    className="text-center max-w-3xl mx-auto mb-20"
+                    className="text-center max-w-3xl mx-auto mb-14"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(200,169,126,0.15)] text-[#c8a97e] text-sm mb-6">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[rgba(200,169,126,0.15)] text-[#c8a97e] text-xs md:text-sm mb-4">
                         <Target className="w-3.5 h-3.5" />
                         <span>{t("features.badge")}</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--color-text-primary)] mb-6">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--color-text-primary)] mb-4">
                         {t("features.title")}
                     </h2>
-                    <p className="text-lg md:text-xl text-[var(--color-text-secondary)]">{t("features.subtitle")}</p>
+                    <p className="text-base md:text-lg text-[var(--color-text-secondary)]">{t("features.subtitle")}</p>
                 </motion.div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {features.map((feature, i) => (
                         <motion.div
                             key={i}
@@ -89,7 +89,7 @@ export function Features() {
                             transition={{ ...transition, delay: i * 0.08 }}
                             className="group relative"
                         >
-                            <div className="relative h-full p-7 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[rgba(200,169,126,0.22)] transition-all duration-500 overflow-hidden">
+                            <div className="relative h-full p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[rgba(200,169,126,0.22)] transition-all duration-500 overflow-hidden">
                                 {/* Hover accent */}
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-[rgba(200,169,126,0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl" />
 
@@ -101,7 +101,7 @@ export function Features() {
                                 </div>
 
                                 {/* Content */}
-                                <h3 className="relative text-lg font-semibold text-[var(--color-text-primary)] mb-2.5 group-hover:text-[#dfc9a8] transition-colors">
+                                <h3 className="relative text-base md:text-lg font-semibold text-[var(--color-text-primary)] mb-2 group-hover:text-[#dfc9a8] transition-colors">
                                     {feature.title}
                                 </h3>
                                 <p className="relative text-sm text-[var(--color-text-secondary)] leading-relaxed group-hover:text-[var(--color-text-muted)] transition-colors">

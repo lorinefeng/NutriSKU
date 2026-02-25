@@ -18,7 +18,7 @@ export function DemoVideo() {
     };
 
     return (
-        <section id="demo" className="relative py-32 overflow-hidden">
+        <section id="demo" className="relative py-24 md:py-28 overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-deep-alt)] via-[var(--color-void)] to-[var(--color-surface)]" />
 
@@ -32,16 +32,16 @@ export function DemoVideo() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-center max-w-3xl mx-auto mb-16"
+                    className="text-center max-w-3xl mx-auto mb-12"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(200,169,126,0.15)] text-[#c8a97e] text-sm mb-6">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[rgba(200,169,126,0.15)] text-[#c8a97e] text-xs md:text-sm mb-4">
                         <MonitorPlay className="w-3.5 h-3.5" />
                         <span>{t("demo.badge")}</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--color-text-primary)] mb-6">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--color-text-primary)] mb-4">
                         {t("demo.title")}
                     </h2>
-                    <p className="text-lg md:text-xl text-[var(--color-text-secondary)]">
+                    <p className="text-base md:text-lg text-[var(--color-text-secondary)]">
                         {t("demo.subtitle")}
                     </p>
                 </motion.div>

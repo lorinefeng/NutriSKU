@@ -27,7 +27,7 @@ export function PptShowcase() {
     );
 
     return (
-        <section id="showcase" className="relative py-32 overflow-hidden">
+        <section id="showcase" className="relative py-24 md:py-28 overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-surface)] via-[var(--color-void)] to-[var(--color-deep-alt)]" />
 
@@ -41,16 +41,16 @@ export function PptShowcase() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-center max-w-3xl mx-auto mb-16"
+                    className="text-center max-w-3xl mx-auto mb-12"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(200,169,126,0.15)] text-[#c8a97e] text-sm mb-6">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[rgba(200,169,126,0.15)] text-[#c8a97e] text-xs md:text-sm mb-4">
                         <BookOpen className="w-3.5 h-3.5" />
                         <span>{t("showcase.badge")}</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--color-text-primary)] mb-6">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--color-text-primary)] mb-4">
                         {t("showcase.title")}
                     </h2>
-                    <p className="text-lg md:text-xl text-[var(--color-text-secondary)]">
+                    <p className="text-base md:text-lg text-[var(--color-text-secondary)]">
                         {t("showcase.subtitle")}
                     </p>
                 </motion.div>
@@ -107,7 +107,7 @@ export function PptShowcase() {
                         </div>
 
                         {/* Navigation bar */}
-                        <div className="flex items-center justify-between mt-6">
+                        <div className="flex items-center justify-between mt-5">
                             {/* Progress indicator */}
                             <div className="flex items-center gap-1.5">
                                 {Array.from({ length: TOTAL_PAGES }).map((_, i) => (
@@ -154,7 +154,7 @@ export function PptShowcase() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="mt-6 max-w-5xl mx-auto"
+                    className="mt-5 max-w-5xl mx-auto"
                 >
                     <div className="flex gap-2 justify-center">
                         {slides.slice(thumbStart, thumbStart + THUMB_VISIBLE).map((src, idx) => {
