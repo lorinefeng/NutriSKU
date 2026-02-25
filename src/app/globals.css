@@ -1,0 +1,280 @@
+@import "tailwindcss";
+
+/* ========================================
+   🎨 NutriSKU Design System
+   Theme: Minimalist Luxury / 简约轻奢
+   ======================================== */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  /* Core Colors — Dark Luxury */
+  --color-void: #0c0c10;
+  --color-deep: #101014;
+  --color-surface: #16161c;
+  --color-surface-elevated: #1e1e26;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-bright: rgba(255, 255, 255, 0.12);
+
+  /* Accent — Warm Gold */
+  --color-gold: #c8a97e;
+  --color-gold-light: #dfc9a8;
+  --color-gold-dim: rgba(200, 169, 126, 0.15);
+  --color-gold-glow: rgba(200, 169, 126, 0.08);
+  --color-champagne: #f5e6d3;
+  --color-ivory: #faf8f5;
+
+  /* Text */
+  --color-text-primary: #f0ece6;
+  --color-text-secondary: #9a9498;
+  --color-text-muted: #5e5a60;
+
+  /* Fonts */
+  --font-display: var(--font-playfair), "Georgia", serif;
+  --font-body: var(--font-dm-sans), "Noto Sans SC", system-ui, sans-serif;
+  --font-cn: "Noto Sans SC", var(--font-dm-sans), system-ui, sans-serif;
+}
+
+/* ---------- Base Styles ---------- */
+body {
+  font-family: var(--font-body);
+  background: var(--color-void);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Typography ---------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Chinese text uses body font */
+html[lang="zh"] h1,
+html[lang="zh"] h2,
+html[lang="zh"] h3,
+html[lang="zh"] h4 {
+  font-family: var(--font-cn);
+  letter-spacing: 0;
+}
+
+/* ---------- Tailwind Theme ---------- */
+@theme inline {
+  --color-background: var(--color-void);
+  --color-foreground: var(--color-text-primary);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+/* ---------- Utility Classes ---------- */
+
+/* Gradient Text — Gold */
+.gradient-text-gold {
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-champagne) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-hero {
+  background: linear-gradient(135deg, #fff 20%, var(--color-gold) 60%, var(--color-champagne) 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass — Frosted Dark */
+.glass {
+  background: rgba(22, 22, 28, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-border);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+}
+
+/* Gold accent border on hover */
+.hover-gold-border {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hover-gold-border::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hover-gold-border:hover::after {
+  width: 100%;
+}
+
+/* ---------- Animations ---------- */
+
+/* Reveal Up */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-reveal-up {
+  animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Fade In */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease forwards;
+}
+
+/* Slide In from Left */
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Subtle float — very gentle */
+@keyframes gentle-float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-gentle-float {
+  animation: gentle-float 6s ease-in-out infinite;
+}
+
+/* Gold pulse — subtle */
+@keyframes gold-pulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-gold-pulse {
+  animation: gold-pulse 3s ease-in-out infinite;
+}
+
+/* Stagger delays */
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.stagger-5 {
+  animation-delay: 0.5s;
+}
+
+/* Skeleton shimmer for loading states */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg,
+      var(--color-surface) 25%,
+      var(--color-surface-elevated) 50%,
+      var(--color-surface) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* ---------- Custom Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-elevated);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(200, 169, 126, 0.3);
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: rgba(200, 169, 126, 0.3);
+  color: var(--color-text-primary);
+}

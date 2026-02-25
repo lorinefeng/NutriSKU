@@ -1,0 +1,89 @@
+"use client";
+
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { GlowButton } from "@/components/ui/GlowButton";
+import { useTranslation } from "@/lib/i18n";
+
+export function Navbar() {
+    const [scrolled, setScrolled] = useState(false);
+    const { locale, toggleLocale, t } = useTranslation();
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    return (
+        <nav
+            className={cn(
+                "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+                scrolled
+                    ? "py-3 bg-[#0c0c10]/85 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
+                    : "py-5 bg-transparent border-b border-transparent"
+            )}
+        >
+            <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+                {/* Logo */}
+                <Link href="/" className="flex items-center gap-2.5 group">
+                    <div className="relative">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#c8a97e] to-[#9a7b54] flex items-center justify-center">
+                            <svg className="w-4 h-4 text-[#0c0c10]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                                <path d="M2 17l10 5 10-5" />
+                                <path d="M2 12l10 5 10-5" />
+                            </svg>
+                        </div>
+                    </div>
+                    <span className="text-xl font-semibold tracking-tight">
+                        <span className="text-[#9a9498]">Nutri</span>
+                        <span className="text-[#f0ece6]">SKU</span>
+                    </span>
+                </Link>
+
+                {/* Nav Links */}
+                <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[#9a9498]">
+                    <Link href="#features" className="hover-gold-border relative pb-1 hover:text-[#f0ece6] transition-colors">
+                        {t("nav.features")}
+                    </Link>
+                    <Link href="#how-it-works" className="hover-gold-border relative pb-1 hover:text-[#f0ece6] transition-colors">
+                        {t("nav.howItWorks")}
+                    </Link>
+                    <Link href="#demo" className="hover-gold-border relative pb-1 hover:text-[#f0ece6] transition-colors">
+                        {t("nav.demo")}
+                    </Link>
+                    <Link href="#showcase" className="hover-gold-border relative pb-1 hover:text-[#f0ece6] transition-colors">
+                        {t("nav.showcase")}
+                    </Link>
+                </div>
+
+                {/* Right: Lang Toggle + CTA */}
+                <div className="flex items-center gap-3">
+                    {/* Language Toggle */}
+                    <button
+                        onClick={toggleLocale}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[rgba(200,169,126,0.2)] text-xs font-medium text-[#c8a97e] hover:bg-[rgba(200,169,126,0.08)] transition-all cursor-pointer"
+                    >
+                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M2 12h20" />
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                        {locale === "zh" ? "EN" : "中"}
+                    </button>
+                    <Link
+                        href="/login"
+                        className="text-sm font-medium text-[#9a9498] hover:text-[#f0ece6] hidden md:block transition-colors"
+                    >
+                        {t("nav.login")}
+                    </Link>
+                    <GlowButton variant="gold" size="sm">
+                        {t("nav.getStarted")}
+                    </GlowButton>
+                </div>
+            </div>
+        </nav>
+    );
+}
