@@ -41,7 +41,7 @@ export function Navbar() {
                         )}
                     >
                         <Image
-                            src="/logo.svg"
+                            src={theme === "light" ? "/logo-light.svg" : "/logo.svg"}
                             alt="NutriSKU"
                             width={176}
                             height={48}
