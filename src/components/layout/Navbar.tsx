@@ -5,10 +5,13 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { useTranslation } from "@/lib/i18n";
+import { useTheme } from "@/lib/theme";
+import { Moon, Sun } from "lucide-react";
 
 export function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const { locale, toggleLocale, t } = useTranslation();
+    const { theme, toggleTheme } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -21,7 +24,7 @@ export function Navbar() {
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
                 scrolled
-                    ? "py-3 bg-[#0c0c10]/85 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
+                    ? "py-3 bg-[var(--color-nav-bg)] backdrop-blur-xl border-b border-[var(--color-border)] shadow-[0_4px_30px_rgba(0,0,0,0.18)]"
                     : "py-5 bg-transparent border-b border-transparent"
             )}
         >
@@ -38,29 +41,39 @@ export function Navbar() {
                         </div>
                     </div>
                     <span className="text-xl font-semibold tracking-tight">
-                        <span className="text-[#9a9498]">Nutri</span>
-                        <span className="text-[#f0ece6]">SKU</span>
+                        <span className="text-[var(--color-text-secondary)]">Nutri</span>
+                        <span className="text-[var(--color-text-primary)]">SKU</span>
                     </span>
                 </Link>
 
                 {/* Nav Links */}
-                <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[#9a9498]">
-                    <Link href="#features" className="hover-gold-border relative pb-1 hover:text-[#f0ece6] transition-colors">
+                <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--color-text-secondary)]">
+                    <Link href="#features" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
                         {t("nav.features")}
                     </Link>
-                    <Link href="#how-it-works" className="hover-gold-border relative pb-1 hover:text-[#f0ece6] transition-colors">
+                    <Link href="#how-it-works" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
                         {t("nav.howItWorks")}
                     </Link>
-                    <Link href="#demo" className="hover-gold-border relative pb-1 hover:text-[#f0ece6] transition-colors">
+                    <Link href="#demo" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
                         {t("nav.demo")}
                     </Link>
-                    <Link href="#showcase" className="hover-gold-border relative pb-1 hover:text-[#f0ece6] transition-colors">
+                    <Link href="#showcase" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
                         {t("nav.showcase")}
                     </Link>
                 </div>
 
-                {/* Right: Lang Toggle + CTA */}
+                {/* Right: Theme + Lang + CTA */}
                 <div className="flex items-center gap-3">
+                    {/* Theme Toggle */}
+                    <button
+                        onClick={toggleTheme}
+                        aria-label={`${t("nav.theme")} ${theme === "dark" ? t("nav.themeLight") : t("nav.themeDark")}`}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[rgba(200,169,126,0.2)] text-xs font-medium text-[#c8a97e] hover:bg-[rgba(200,169,126,0.08)] transition-all cursor-pointer"
+                    >
+                        {theme === "dark" ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+                        <span className="hidden md:inline">{theme === "dark" ? t("nav.themeLight") : t("nav.themeDark")}</span>
+                    </button>
+
                     {/* Language Toggle */}
                     <button
                         onClick={toggleLocale}
@@ -75,7 +88,7 @@ export function Navbar() {
                     </button>
                     <Link
                         href="/login"
-                        className="text-sm font-medium text-[#9a9498] hover:text-[#f0ece6] hidden md:block transition-colors"
+                        className="text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hidden md:block transition-colors"
                     >
                         {t("nav.login")}
                     </Link>

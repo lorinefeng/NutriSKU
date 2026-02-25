@@ -29,7 +29,7 @@ export function PptShowcase() {
     return (
         <section id="showcase" className="relative py-32 overflow-hidden">
             {/* Background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0e0e14] via-[#0c0c10] to-[#0a0a0e]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-surface)] via-[var(--color-void)] to-[var(--color-deep-alt)]" />
 
             {/* Subtle gold accent */}
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(200,169,126,0.1)] to-transparent" />
@@ -47,10 +47,10 @@ export function PptShowcase() {
                         <BookOpen className="w-3.5 h-3.5" />
                         <span>{t("showcase.badge")}</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#f0ece6] mb-6">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--color-text-primary)] mb-6">
                         {t("showcase.title")}
                     </h2>
-                    <p className="text-lg md:text-xl text-[#9a9498]">
+                    <p className="text-lg md:text-xl text-[var(--color-text-secondary)]">
                         {t("showcase.subtitle")}
                     </p>
                 </motion.div>
@@ -65,7 +65,7 @@ export function PptShowcase() {
                 >
                     <div className="relative">
                         {/* Main slide area */}
-                        <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-white/[0.06] bg-[#101014] shadow-[0_25px_60px_rgba(0,0,0,0.5)]">
+                        <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-deep)] shadow-[0_25px_60px_rgba(0,0,0,0.25)]">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={currentPage}
@@ -124,21 +124,21 @@ export function PptShowcase() {
 
                             {/* Page counter & arrows */}
                             <div className="flex items-center gap-3">
-                                <span className="text-xs text-[#5e5a60]">
+                                <span className="text-xs text-[var(--color-text-muted)]">
                                     {t("showcase.page")} {currentPage + 1} / {TOTAL_PAGES}
                                 </span>
                                 <div className="flex gap-1">
                                     <button
                                         onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
                                         disabled={currentPage === 0}
-                                        className="w-8 h-8 rounded-lg border border-white/[0.06] bg-white/[0.02] flex items-center justify-center text-[#5e5a60] hover:text-[#9a9498] hover:border-white/[0.1] disabled:opacity-30 disabled:cursor-default transition-all cursor-pointer"
+                                        className="w-8 h-8 rounded-lg border border-[var(--color-border)] bg-[var(--color-glass-light)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] hover:border-[var(--color-border-bright)] disabled:opacity-30 disabled:cursor-default transition-all cursor-pointer"
                                     >
                                         <ChevronLeft className="w-4 h-4" />
                                     </button>
                                     <button
                                         onClick={() => setCurrentPage(Math.min(TOTAL_PAGES - 1, currentPage + 1))}
                                         disabled={currentPage === TOTAL_PAGES - 1}
-                                        className="w-8 h-8 rounded-lg border border-white/[0.06] bg-white/[0.02] flex items-center justify-center text-[#5e5a60] hover:text-[#9a9498] hover:border-white/[0.1] disabled:opacity-30 disabled:cursor-default transition-all cursor-pointer"
+                                        className="w-8 h-8 rounded-lg border border-[var(--color-border)] bg-[var(--color-glass-light)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] hover:border-[var(--color-border-bright)] disabled:opacity-30 disabled:cursor-default transition-all cursor-pointer"
                                     >
                                         <ChevronRight className="w-4 h-4" />
                                     </button>

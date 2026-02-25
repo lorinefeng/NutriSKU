@@ -42,7 +42,7 @@ export function HowItWorks() {
     return (
         <section id="how-it-works" className="relative py-32 overflow-hidden">
             {/* Background */}
-            <div className="absolute inset-0 bg-[#0a0a0e]" />
+            <div className="absolute inset-0 bg-[var(--color-deep-alt)]" />
 
             {/* Subtle warm glow */}
             <div className="absolute inset-0 opacity-40 pointer-events-none">
@@ -63,12 +63,12 @@ export function HowItWorks() {
                         <Globe className="w-3.5 h-3.5" />
                         <span>{t("howItWorks.badge")}</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#f0ece6] mb-6">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--color-text-primary)] mb-6">
                         {t("howItWorks.title.pre")}
                         <span className="gradient-text-gold">{t("howItWorks.title.brand")}</span>
                         {t("howItWorks.title.post")}
                     </h2>
-                    <p className="text-lg md:text-xl text-[#9a9498]">{t("howItWorks.subtitle")}</p>
+                    <p className="text-lg md:text-xl text-[var(--color-text-secondary)]">{t("howItWorks.subtitle")}</p>
                 </motion.div>
 
                 {/* Steps */}
@@ -90,15 +90,15 @@ export function HowItWorks() {
                         >
                             {/* Card */}
                             <div className={`lg:w-[calc(50%-32px)] ${index % 2 === 0 ? "lg:pr-8 lg:text-right" : "lg:pl-8 lg:text-left"}`}>
-                                <div className="group relative p-6 md:p-7 rounded-2xl bg-[#0e0e14] border border-white/[0.05] hover:border-[rgba(200,169,126,0.12)] transition-all duration-500">
+                                <div className="group relative p-6 md:p-7 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[rgba(200,169,126,0.22)] transition-all duration-500">
                                     {/* Step badge */}
                                     <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[rgba(200,169,126,0.15)] text-[10px] font-bold text-[#c8a97e] mb-4 tracking-widest">
                                         STEP {step.number}
                                     </div>
-                                    <h3 className="text-xl font-semibold text-[#f0ece6] mb-2.5 group-hover:text-[#dfc9a8] transition-colors">
+                                    <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2.5 group-hover:text-[#dfc9a8] transition-colors">
                                         {step.title}
                                     </h3>
-                                    <p className="text-sm text-[#9a9498] leading-relaxed group-hover:text-[#b0aaae] transition-colors">
+                                    <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed group-hover:text-[var(--color-text-muted)] transition-colors">
                                         {step.description}
                                     </p>
                                 </div>
@@ -108,7 +108,7 @@ export function HowItWorks() {
                             <div className="hidden lg:flex items-center justify-center w-16 shrink-0">
                                 <div className="relative">
                                     <div className="absolute -inset-3 rounded-full bg-[rgba(200,169,126,0.06)] blur-lg" />
-                                    <div className="relative w-12 h-12 rounded-full border border-[rgba(200,169,126,0.2)] bg-[#0a0a0e] flex items-center justify-center">
+                                    <div className="relative w-12 h-12 rounded-full border border-[rgba(200,169,126,0.2)] bg-[var(--color-deep-alt)] flex items-center justify-center">
                                         <step.icon className="w-5 h-5 text-[#c8a97e]" />
                                     </div>
                                 </div>
@@ -136,14 +136,14 @@ export function HowItWorks() {
                     transition={{ ...transition, delay: 0.4 }}
                     className="text-center mt-20"
                 >
-                    <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl border border-white/[0.05] bg-white/[0.02]">
+                    <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-glass-light)]">
                         <div className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-[#c8a97e] animate-gold-pulse" />
-                            <span className="text-[#9a9498] text-sm">
+                            <span className="text-[var(--color-text-secondary)] text-sm">
                                 {t("howItWorks.cta.setup")}
                             </span>
                         </div>
-                        <p className="text-[#5e5a60]">{t("howItWorks.cta.question")}</p>
+                        <p className="text-[var(--color-text-muted)]">{t("howItWorks.cta.question")}</p>
                         <a
                             href="#"
                             className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#c8a97e] to-[#b8956a] text-[#0c0c10] font-semibold hover:shadow-[0_0_30px_rgba(200,169,126,0.25)] transition-all duration-300"

@@ -48,7 +48,7 @@ export function Features() {
     return (
         <section id="features" className="relative py-32 overflow-hidden">
             {/* Background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0c0c10] via-[#0e0e14] to-[#0c0c10]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-void)] via-[var(--color-surface)] to-[var(--color-void)]" />
 
             {/* Subtle grid */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(200,169,126,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(200,169,126,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
@@ -72,10 +72,10 @@ export function Features() {
                         <Target className="w-3.5 h-3.5" />
                         <span>{t("features.badge")}</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#f0ece6] mb-6">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--color-text-primary)] mb-6">
                         {t("features.title")}
                     </h2>
-                    <p className="text-lg md:text-xl text-[#9a9498]">{t("features.subtitle")}</p>
+                    <p className="text-lg md:text-xl text-[var(--color-text-secondary)]">{t("features.subtitle")}</p>
                 </motion.div>
 
                 {/* Grid */}
@@ -89,7 +89,7 @@ export function Features() {
                             transition={{ ...transition, delay: i * 0.08 }}
                             className="group relative"
                         >
-                            <div className="relative h-full p-7 rounded-2xl bg-[#12121a] border border-white/[0.05] hover:border-[rgba(200,169,126,0.15)] transition-all duration-500 overflow-hidden">
+                            <div className="relative h-full p-7 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[rgba(200,169,126,0.22)] transition-all duration-500 overflow-hidden">
                                 {/* Hover accent */}
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-[rgba(200,169,126,0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl" />
 
@@ -101,10 +101,10 @@ export function Features() {
                                 </div>
 
                                 {/* Content */}
-                                <h3 className="relative text-lg font-semibold text-[#f0ece6] mb-2.5 group-hover:text-[#dfc9a8] transition-colors">
+                                <h3 className="relative text-lg font-semibold text-[var(--color-text-primary)] mb-2.5 group-hover:text-[#dfc9a8] transition-colors">
                                     {feature.title}
                                 </h3>
-                                <p className="relative text-sm text-[#9a9498] leading-relaxed group-hover:text-[#b0aaae] transition-colors">
+                                <p className="relative text-sm text-[var(--color-text-secondary)] leading-relaxed group-hover:text-[var(--color-text-muted)] transition-colors">
                                     {feature.description}
                                 </p>
 

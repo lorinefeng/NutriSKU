@@ -20,7 +20,7 @@ export function DemoVideo() {
     return (
         <section id="demo" className="relative py-32 overflow-hidden">
             {/* Background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0e] via-[#0c0c10] to-[#0e0e14]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-deep-alt)] via-[var(--color-void)] to-[var(--color-surface)]" />
 
             {/* Center glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(200,169,126,0.05)_0%,transparent_70%)]" />
@@ -38,10 +38,10 @@ export function DemoVideo() {
                         <MonitorPlay className="w-3.5 h-3.5" />
                         <span>{t("demo.badge")}</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#f0ece6] mb-6">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--color-text-primary)] mb-6">
                         {t("demo.title")}
                     </h2>
-                    <p className="text-lg md:text-xl text-[#9a9498]">
+                    <p className="text-lg md:text-xl text-[var(--color-text-secondary)]">
                         {t("demo.subtitle")}
                     </p>
                 </motion.div>
@@ -54,7 +54,7 @@ export function DemoVideo() {
                     transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     className="max-w-4xl mx-auto"
                 >
-                    <div className="relative rounded-2xl overflow-hidden border border-white/[0.06] bg-[#101014] shadow-[0_25px_60px_rgba(0,0,0,0.6)]">
+                    <div className="relative rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-deep)] shadow-[0_25px_60px_rgba(0,0,0,0.25)]">
                         {/* Window chrome */}
                         <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.04] bg-white/[0.02]">
                             <div className="flex gap-1.5">
@@ -62,11 +62,11 @@ export function DemoVideo() {
                                 <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08]" />
                                 <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08]" />
                             </div>
-                            <span className="ml-2 text-xs text-[#5e5a60]">NutriSKU Workbench — Demo</span>
+                            <span className="ml-2 text-xs text-[var(--color-text-muted)]">NutriSKU Workbench — Demo</span>
                         </div>
 
                         {/* Video area */}
-                        <div className="relative aspect-video bg-[#0a0a0e]">
+                        <div className="relative aspect-video bg-[var(--color-deep-alt)]">
                             <video
                                 ref={videoRef}
                                 className="absolute inset-0 w-full h-full object-cover"

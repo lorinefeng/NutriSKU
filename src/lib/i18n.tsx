@@ -12,6 +12,9 @@ const translations = {
     "nav.showcase": { zh: "产品手册", en: "Showcase" },
     "nav.login": { zh: "登录", en: "Log in" },
     "nav.getStarted": { zh: "立即体验", en: "Get Started" },
+    "nav.theme": { zh: "主题", en: "Theme" },
+    "nav.themeLight": { zh: "亮", en: "Light" },
+    "nav.themeDark": { zh: "暗", en: "Dark" },
 
     // Hero
     "hero.badge": { zh: "新一代 AI 搜索营销策略", en: "Next-Gen AI Search Marketing" },
@@ -103,6 +106,19 @@ const translations = {
         en: "Ready to make AI models love your products?",
     },
     "howItWorks.cta.button": { zh: "预约演示", en: "Schedule a Demo" },
+
+    // Brand Matrix
+    "brandMatrix.badge": { zh: "服务客户", en: "Client Portfolio" },
+    "brandMatrix.title": { zh: "顶级行业客户矩阵", en: "Top-Tier Client Matrix" },
+    "brandMatrix.subtitle": {
+        zh: "依据服务年限排序，覆盖快时尚、奢侈品与运动零售核心品牌。",
+        en: "Ranked by service years across fast fashion, luxury, and sports retail brands.",
+    },
+    "brandMatrix.since": { zh: "服务起始", en: "Since" },
+    "brandMatrix.today": { zh: "持续至今", en: "Active" },
+    "brandMatrix.stat.brands": { zh: "覆盖头部品牌", en: "Top Brands Covered" },
+    "brandMatrix.stat.gmv": { zh: "支撑年 GMV", en: "Annual GMV Supported" },
+    "brandMatrix.stat.skus": { zh: "处理 SKU 数量", en: "SKUs Processed" },
 
     // Demo Video
     "demo.badge": { zh: "产品演示", en: "Product Demo" },

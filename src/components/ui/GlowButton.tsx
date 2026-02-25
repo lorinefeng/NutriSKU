@@ -25,7 +25,7 @@ const GlowButton = forwardRef<HTMLButtonElement, GlowButtonProps>(
                     variant === "outline" &&
                     "border border-[rgba(200,169,126,0.3)] text-[#c8a97e] hover:bg-[rgba(200,169,126,0.08)] hover:border-[rgba(200,169,126,0.5)]",
                     variant === "ghost" &&
-                    "text-[#9a9498] hover:text-[#f0ece6] hover:bg-white/5",
+                    "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-glass-light)]",
                     className
                 )}
                 {...props}

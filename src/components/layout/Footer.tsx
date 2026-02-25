@@ -37,7 +37,7 @@ export function Footer() {
     ];
 
     return (
-        <footer className="relative border-t border-white/[0.04] bg-[#0a0a0e]">
+        <footer className="relative border-t border-[var(--color-border)] bg-[var(--color-deep-alt)]">
             {/* Top border glow */}
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(200,169,126,0.15)] to-transparent" />
 
@@ -55,11 +55,11 @@ export function Footer() {
                                 </svg>
                             </div>
                             <span className="text-lg font-semibold tracking-tight">
-                                <span className="text-[#5e5a60]">Nutri</span>
-                                <span className="text-[#f0ece6]">SKU</span>
+                                <span className="text-[var(--color-text-muted)]">Nutri</span>
+                                <span className="text-[var(--color-text-primary)]">SKU</span>
                             </span>
                         </Link>
-                        <p className="text-sm text-[#5e5a60] max-w-xs leading-relaxed">
+                        <p className="text-sm text-[var(--color-text-muted)] max-w-xs leading-relaxed">
                             {t("footer.desc")}
                         </p>
                     </div>
@@ -67,7 +67,7 @@ export function Footer() {
                     {/* Link columns */}
                     {columns.map((col, i) => (
                         <div key={i}>
-                            <h4 className="text-xs font-semibold text-[#9a9498] uppercase tracking-wider mb-4">
+                            <h4 className="text-xs font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider mb-4">
                                 {col.title}
                             </h4>
                             <ul className="space-y-2.5">
@@ -75,7 +75,7 @@ export function Footer() {
                                     <li key={j}>
                                         <Link
                                             href={link.href}
-                                            className="text-sm text-[#5e5a60] hover:text-[#c8a97e] transition-colors"
+                                            className="text-sm text-[var(--color-text-muted)] hover:text-[#c8a97e] transition-colors"
                                         >
                                             {link.label}
                                         </Link>
@@ -87,12 +87,12 @@ export function Footer() {
                 </div>
 
                 {/* Bottom bar */}
-                <div className="py-6 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <span className="text-xs text-[#3a3a44]">{t("footer.copyright")}</span>
-                    <div className="flex items-center gap-5 text-xs text-[#3a3a44]">
-                        <Link href="#" className="hover:text-[#5e5a60] transition-colors">{t("footer.privacy")}</Link>
-                        <Link href="#" className="hover:text-[#5e5a60] transition-colors">{t("footer.terms")}</Link>
-                        <Link href="#" className="hover:text-[#5e5a60] transition-colors">{t("footer.cookies")}</Link>
+                <div className="py-6 border-t border-[var(--color-border)] flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <span className="text-xs text-[var(--color-text-dim)]">{t("footer.copyright")}</span>
+                    <div className="flex items-center gap-5 text-xs text-[var(--color-text-dim)]">
+                        <Link href="#" className="hover:text-[var(--color-text-muted)] transition-colors">{t("footer.privacy")}</Link>
+                        <Link href="#" className="hover:text-[var(--color-text-muted)] transition-colors">{t("footer.terms")}</Link>
+                        <Link href="#" className="hover:text-[var(--color-text-muted)] transition-colors">{t("footer.cookies")}</Link>
                     </div>
                 </div>
             </div>

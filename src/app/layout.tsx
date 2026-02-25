@@ -3,6 +3,7 @@ import { DM_Sans, Playfair_Display, Noto_Sans_SC } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { LanguageProvider } from "@/lib/i18n";
+import { ThemeProvider } from "@/lib/theme";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -43,12 +44,14 @@ export default function RootLayout({
       lang="zh"
       className={`scroll-smooth ${dmSans.variable} ${playfair.variable} ${notoSansSC.variable}`}
     >
-      <body className="bg-[#0c0c10] text-[#f0ece6] antialiased">
-        <LanguageProvider>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-        </LanguageProvider>
+      <body className="bg-[var(--color-void)] text-[var(--color-text-primary)] antialiased transition-colors duration-500">
+        <ThemeProvider>
+          <LanguageProvider>
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

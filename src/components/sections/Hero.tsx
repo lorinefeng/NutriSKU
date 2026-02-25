@@ -41,7 +41,7 @@ export function Hero() {
                 {/* Warm glow — top center */}
                 <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(200,169,126,0.06)_0%,transparent_70%)]" />
                 {/* Bottom fade */}
-                <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0c0c10] to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[var(--color-void)] to-transparent" />
             </div>
 
             {/* Decorative lines */}
@@ -70,9 +70,9 @@ export function Hero() {
                     {/* Headline */}
                     <motion.h1
                         variants={itemVariants}
-                        className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 leading-[1.1]"
+                        className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.1]"
                     >
-                        <span className="text-[#f0ece6]">{t("hero.title.line1")}</span>
+                        <span className="text-[var(--color-text-primary)]">{t("hero.title.line1")}</span>
                         <br />
                         <span className="gradient-text-hero">{t("hero.title.highlight")}</span>
                     </motion.h1>
@@ -80,7 +80,7 @@ export function Hero() {
                     {/* Subtitle */}
                     <motion.p
                         variants={itemVariants}
-                        className="text-lg md:text-xl text-[#9a9498] mb-12 max-w-2xl mx-auto leading-relaxed"
+                        className="text-lg md:text-xl text-[var(--color-text-secondary)] mb-12 max-w-2xl mx-auto leading-relaxed"
                     >
                         {t("hero.subtitle")}
                     </motion.p>
@@ -105,9 +105,9 @@ export function Hero() {
                             <div key={i} className="text-center group">
                                 <div className="flex items-center justify-center gap-2 mb-2">
                                     <stat.icon className="w-4 h-4 text-[#c8a97e] opacity-60 group-hover:opacity-100 transition-opacity" />
-                                    <span className="text-3xl md:text-4xl font-bold text-[#f0ece6]">{stat.value}</span>
+                                    <span className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)]">{stat.value}</span>
                                 </div>
-                                <span className="text-xs text-[#5e5a60] group-hover:text-[#9a9498] transition-colors">{stat.label}</span>
+                                <span className="text-xs text-[var(--color-text-muted)] group-hover:text-[var(--color-text-secondary)] transition-colors">{stat.label}</span>
                             </div>
                         ))}
                     </motion.div>
@@ -132,7 +132,7 @@ export function Hero() {
                                     <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
                                     <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
                                 </div>
-                                <span className="text-xs text-[#5e5a60] ml-2">AI Shopping Assistant</span>
+                                <span className="text-xs text-[var(--color-text-muted)] ml-2">AI Shopping Assistant</span>
                             </div>
                             <div className="flex items-center gap-1.5 px-2 py-1 rounded-full border border-[rgba(200,169,126,0.2)]">
                                 <span className="w-1.5 h-1.5 rounded-full bg-[#c8a97e] animate-gold-pulse" />
@@ -144,10 +144,10 @@ export function Hero() {
                         <div className="flex flex-col gap-5">
                             {/* User */}
                             <div className="flex gap-3">
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#3a3a44] to-[#2a2a34] flex items-center justify-center text-[#9a9498] text-xs font-medium shrink-0">
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--color-surface-elevated)] to-[var(--color-surface)] flex items-center justify-center text-[var(--color-text-secondary)] text-xs font-medium shrink-0">
                                     U
                                 </div>
-                                <div className="bg-white/[0.03] rounded-2xl rounded-tl-none px-4 py-3 text-[#9a9498] text-sm max-w-[85%] border border-white/[0.04]">
+                                <div className="bg-[var(--color-glass-light)] rounded-2xl rounded-tl-none px-4 py-3 text-[var(--color-text-secondary)] text-sm max-w-[85%] border border-[var(--color-border)]">
                                     推荐一款防风耐穿、适合城市通勤的夹克，预算 500 元以内。
                                 </div>
                             </div>
@@ -162,25 +162,25 @@ export function Hero() {
                                 </div>
                                 <div className="space-y-3 max-w-[90%]">
                                     <div className="border border-[rgba(200,169,126,0.15)] bg-[rgba(200,169,126,0.03)] rounded-2xl rounded-tl-none px-4 py-3">
-                                        <p className="text-[#9a9498] text-sm mb-3">根据您的需求，强烈推荐：</p>
+                                        <p className="text-[var(--color-text-secondary)] text-sm mb-3">根据您的需求，强烈推荐：</p>
                                         {/* Product Card */}
-                                        <div className="flex gap-3 p-3 rounded-xl border border-[rgba(200,169,126,0.12)] bg-white/[0.02]">
-                                            <div className="w-16 h-16 bg-gradient-to-br from-[#1e1e26] to-[#16161c] rounded-lg flex items-center justify-center shrink-0">
-                                                <svg className="w-8 h-8 text-[#5e5a60]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <div className="flex gap-3 p-3 rounded-xl border border-[rgba(200,169,126,0.12)] bg-[var(--color-glass-light)]">
+                                            <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-surface-elevated)] to-[var(--color-surface)] rounded-lg flex items-center justify-center shrink-0">
+                                                <svg className="w-8 h-8 text-[var(--color-text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                                                 </svg>
                                             </div>
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-2 mb-1">
-                                                    <h4 className="font-semibold text-[#f0ece6] text-sm">UltraCommute 通勤夹克</h4>
+                                                    <h4 className="font-semibold text-[var(--color-text-primary)] text-sm">UltraCommute 通勤夹克</h4>
                                                     <span className="px-1.5 py-0.5 bg-[rgba(200,169,126,0.12)] text-[#c8a97e] text-[9px] font-medium rounded-full border border-[rgba(200,169,126,0.2)]">
                                                         最佳性价比
                                                     </span>
                                                 </div>
-                                                <p className="text-xs text-[#5e5a60] mb-1.5">加固缝线、DWR 防水涂层，30 天无忧退换</p>
+                                                <p className="text-xs text-[var(--color-text-muted)] mb-1.5">加固缝线、DWR 防水涂层，30 天无忧退换</p>
                                                 <div className="flex items-center gap-2">
-                                                    <span className="text-sm font-semibold text-[#f0ece6]">¥449</span>
-                                                    <span className="text-xs text-[#5e5a60] line-through">¥659</span>
+                                                    <span className="text-sm font-semibold text-[var(--color-text-primary)]">¥449</span>
+                                                    <span className="text-xs text-[var(--color-text-muted)] line-through">¥659</span>
                                                 </div>
                                             </div>
                                         </div>
