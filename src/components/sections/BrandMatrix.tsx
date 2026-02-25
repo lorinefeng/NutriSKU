@@ -27,7 +27,7 @@ const brands = [
 
 export function BrandMatrix() {
     const { t, locale } = useTranslation();
-    const loopBrands = [...brands, ...brands];
+    const rows = [brands.slice(0, 4), brands.slice(4, 8), brands.slice(8, 12)];
 
     return (
         <section id="client-matrix" className="relative py-20 md:py-24 overflow-hidden">
@@ -61,27 +61,36 @@ export function BrandMatrix() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-60px" }}
                     transition={{ ...transition, delay: 0.1 }}
-                    className="logo-marquee-viewport"
+                    className="logo-marquee-stack"
                 >
-                    <div className="logo-marquee-track">
-                        {loopBrands.map((brand, index) => (
-                            <article key={`${brand.name}-${index}`} className="logo-marquee-item">
-                                <div className="logo-item">
-                                    <Image
-                                        src={brand.src}
-                                        alt={brand.name}
-                                        width={160}
-                                        height={80}
-                                        className={`logo-marquee-image ${brand.fit}`}
-                                        priority={index < 4}
-                                    />
+                    {rows.map((row, rowIndex) => {
+                        const loopRow = [...row, ...row];
+                        const directionClass = rowIndex === 1 ? "" : "logo-marquee-track--reverse";
+
+                        return (
+                            <div key={rowIndex} className="logo-marquee-viewport">
+                                <div className={`logo-marquee-track ${directionClass}`}>
+                                    {loopRow.map((brand, index) => (
+                                        <article key={`${brand.name}-${rowIndex}-${index}`} className="logo-marquee-item">
+                                            <div className="logo-item">
+                                                <Image
+                                                    src={brand.src}
+                                                    alt={brand.name}
+                                                    width={160}
+                                                    height={80}
+                                                    className={`logo-marquee-image ${brand.fit}`}
+                                                    priority={rowIndex === 0 && index < 4}
+                                                />
+                                            </div>
+                                            <p className="mt-3 text-center text-xs md:text-sm text-[var(--color-text-muted)] tracking-wide">
+                                                {t("brandMatrix.since")} {brand.since} · {t("brandMatrix.today")}
+                                            </p>
+                                        </article>
+                                    ))}
                                 </div>
-                                <p className="mt-3 text-center text-xs md:text-sm text-[var(--color-text-muted)] tracking-wide">
-                                    {t("brandMatrix.since")} {brand.since} · {t("brandMatrix.today")}
-                                </p>
-                            </article>
-                        ))}
-                    </div>
+                            </div>
+                        );
+                    })}
                 </motion.div>
 
                 <motion.div

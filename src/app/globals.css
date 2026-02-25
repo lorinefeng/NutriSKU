@@ -147,13 +147,23 @@ html[lang="zh"] h4 {
   -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
 }
 
+.logo-marquee-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
 .logo-marquee-track {
   display: flex;
   flex-wrap: nowrap;
   width: max-content;
   gap: 16px;
-  animation: logo-marquee-scroll 28s linear infinite;
+  animation: logo-marquee-scroll 22s linear infinite;
   will-change: transform;
+}
+
+.logo-marquee-track--reverse {
+  animation-direction: reverse;
 }
 
 .logo-marquee-track:hover {
