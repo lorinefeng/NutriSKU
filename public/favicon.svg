@@ -1,4 +1,27 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="32" height="32" rx="8" fill="#0F172A"/>
-    <path d="M16 6L18 13L25 15L18 17L16 24L14 17L7 15L14 13L16 6Z" fill="#10B981"/>
+    <!-- 背景：极简暗黑色 -->
+    <rect width="32" height="32" rx="8" fill="#0c0c10"/>
+    
+    <!-- 渐变色定义 (香槟金过渡品牌金到琥珀色) -->
+    <defs>
+        <linearGradient id="goldGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#f5e6d3"/>
+            <stop offset="0.5" stop-color="#c8a97e"/>
+            <stop offset="1" stop-color="#d97706"/>
+        </linearGradient>
+    </defs>
+    
+    <!-- 放大镜与 AI 星形图标 (按 32x32 比例缩放并居中) -->
+    <g transform="translate(6, 6) scale(0.625)">
+        <!-- 放大镜镜框 -->
+        <circle cx="16" cy="16" r="14" stroke="url(#goldGradient)" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- 放大镜手柄 -->
+        <path d="M 26 26 L 33 33" stroke="url(#goldGradient)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        
+        <!-- 微笑弧线 -->
+        <path d="M 10 18 Q 16 26 22 18" stroke="url(#goldGradient)" stroke-width="3" stroke-linecap="round" fill="none"/>
+        
+        <!-- AI 发光星形 -->
+        <path d="M 12 5 Q 12 10 7 10 Q 12 10 12 15 Q 12 10 17 10 Q 12 10 12 5 Z" fill="url(#goldGradient)"/>
+    </g>
 </svg>

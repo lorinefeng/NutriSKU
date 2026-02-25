@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useTranslation } from "@/lib/i18n";
+import Image from "next/image";
 
 export function Footer() {
     const { t } = useTranslation();
@@ -47,17 +48,15 @@ export function Footer() {
                     {/* Brand column */}
                     <div className="md:col-span-2">
                         <Link href="/" className="inline-flex items-center gap-2.5 mb-5">
-                            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#c8a97e] to-[#9a7b54] flex items-center justify-center">
-                                <svg className="w-3.5 h-3.5 text-[#0c0c10]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                                    <path d="M2 17l10 5 10-5" />
-                                    <path d="M2 12l10 5 10-5" />
-                                </svg>
+                            <div className="rounded-xl px-2 py-1 bg-[rgba(12,12,16,0.88)] border border-[rgba(200,169,126,0.22)]">
+                                <Image
+                                    src="/logo.svg"
+                                    alt="NutriSKU"
+                                    width={164}
+                                    height={44}
+                                    className="h-8 w-auto"
+                                />
                             </div>
-                            <span className="text-lg font-semibold tracking-tight">
-                                <span className="text-[var(--color-text-muted)]">Nutri</span>
-                                <span className="text-[var(--color-text-primary)]">SKU</span>
-                            </span>
                         </Link>
                         <p className="text-sm text-[var(--color-text-muted)] max-w-xs leading-relaxed">
                             {t("footer.desc")}

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   description:
     "不只是 Google 排名。让 ChatGPT、DeepSeek、Claude 主动推荐你的产品。NutriSKU 通过 GEO 策略，让 AI 搜索成为你的增长引擎。",
   icons: {
-    icon: "/favicon.svg",
+    icon: [{ url: "/favicon.svg?v=20260225", type: "image/svg+xml" }],
   },
 };
 

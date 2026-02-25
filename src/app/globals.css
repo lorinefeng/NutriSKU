@@ -141,13 +141,41 @@ html[lang="zh"] h4 {
 
 .logo-marquee-viewport {
   position: relative;
-  width: 100%;
+  width: min(100%, calc(var(--logo-row-width) + 2px));
+  margin: 0 auto;
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  border-radius: 18px;
+}
+
+.logo-marquee-viewport::before,
+.logo-marquee-viewport::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 74px;
+  z-index: 2;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.logo-marquee-viewport::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-void) 0%, color-mix(in srgb, var(--color-void) 64%, transparent) 52%, transparent 100%);
+}
+
+.logo-marquee-viewport::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-void) 0%, color-mix(in srgb, var(--color-void) 64%, transparent) 52%, transparent 100%);
 }
 
 .logo-marquee-stack {
+  --logo-card-w: 196px;
+  --logo-gap: 16px;
+  --logo-row-width: calc(var(--logo-card-w) * 4 + var(--logo-gap) * 3);
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -155,9 +183,8 @@ html[lang="zh"] h4 {
 
 .logo-marquee-track {
   display: flex;
-  flex-wrap: nowrap;
+  align-items: stretch;
   width: max-content;
-  gap: 16px;
   animation: logo-marquee-scroll 22s linear infinite;
   will-change: transform;
 }
@@ -166,13 +193,22 @@ html[lang="zh"] h4 {
   animation-direction: reverse;
 }
 
-.logo-marquee-track:hover {
+.logo-marquee-viewport:hover .logo-marquee-track {
   animation-play-state: paused;
 }
 
+.logo-marquee-group {
+  display: flex;
+  gap: var(--logo-gap);
+  padding-right: var(--logo-gap);
+}
+
 .logo-marquee-item {
-  width: 196px;
-  min-width: 196px;
+  width: var(--logo-card-w);
+  min-width: var(--logo-card-w);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   border-radius: 16px;
   background: var(--logo-card-bg);
   border: 1px solid var(--logo-card-border);
@@ -206,6 +242,10 @@ html[lang="zh"] h4 {
   filter: grayscale(0%) opacity(1);
 }
 
+.logo-marquee-meta {
+  min-height: 1.35rem;
+}
+
 .logo-fit-square {
   max-width: 92px;
   max-height: 72px;
@@ -230,6 +270,25 @@ html[lang="zh"] h4 {
 .logo-fit-tall {
   max-width: 112px;
   max-height: 70px;
+}
+
+@media (max-width: 1024px) {
+  .logo-marquee-stack {
+    --logo-card-w: 184px;
+    --logo-gap: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .logo-marquee-stack {
+    --logo-card-w: 168px;
+    --logo-gap: 10px;
+  }
+
+  .logo-marquee-viewport::before,
+  .logo-marquee-viewport::after {
+    width: 42px;
+  }
 }
 
 /* Gold accent border on hover */

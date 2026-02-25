@@ -7,6 +7,7 @@ import { GlowButton } from "@/components/ui/GlowButton";
 import { useTranslation } from "@/lib/i18n";
 import { useTheme } from "@/lib/theme";
 import { Moon, Sun } from "lucide-react";
+import Image from "next/image";
 
 export function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -31,19 +32,16 @@ export function Navbar() {
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2.5 group">
-                    <div className="relative">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#c8a97e] to-[#9a7b54] flex items-center justify-center">
-                            <svg className="w-4 h-4 text-[#0c0c10]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                                <path d="M2 17l10 5 10-5" />
-                                <path d="M2 12l10 5 10-5" />
-                            </svg>
-                        </div>
+                    <div className="rounded-xl px-2.5 py-1 bg-[rgba(12,12,16,0.9)] border border-[rgba(200,169,126,0.28)] shadow-[0_6px_18px_rgba(0,0,0,0.12)]">
+                        <Image
+                            src="/logo.svg"
+                            alt="NutriSKU"
+                            width={176}
+                            height={48}
+                            className="h-8 md:h-9 w-auto"
+                            priority
+                        />
                     </div>
-                    <span className="text-xl font-semibold tracking-tight">
-                        <span className="text-[var(--color-text-secondary)]">Nutri</span>
-                        <span className="text-[var(--color-text-primary)]">SKU</span>
-                    </span>
                 </Link>
 
                 {/* Nav Links */}
