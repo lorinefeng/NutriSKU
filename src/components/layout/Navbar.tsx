@@ -32,7 +32,14 @@ export function Navbar() {
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2.5 group">
-                    <div className="rounded-xl px-2.5 py-1 bg-[rgba(12,12,16,0.9)] border border-[rgba(200,169,126,0.28)] shadow-[0_6px_18px_rgba(0,0,0,0.12)]">
+                    <div
+                        className={cn(
+                            "rounded-xl px-2.5 py-1 border transition-colors duration-300",
+                            theme === "light"
+                                ? "bg-[rgba(250,244,233,0.96)] border-[rgba(176,146,102,0.32)] shadow-[0_6px_16px_rgba(139,111,68,0.12)]"
+                                : "bg-[rgba(12,12,16,0.9)] border-[rgba(200,169,126,0.28)] shadow-[0_6px_18px_rgba(0,0,0,0.12)]"
+                        )}
+                    >
                         <Image
                             src="/logo.svg"
                             alt="NutriSKU"
