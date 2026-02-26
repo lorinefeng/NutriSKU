@@ -62,7 +62,7 @@ export function DemoVideo() {
                                 <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08]" />
                                 <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08]" />
                             </div>
-                            <span className="ml-2 text-xs text-[var(--color-text-muted)]">NutriSKU Workbench — Demo</span>
+                            <span className="ml-2 text-xs text-[var(--color-text-muted)]">SkuGEO Workbench — Demo</span>
                         </div>
 
                         {/* Video area */}

@@ -21,8 +21,8 @@ const translations = {
     "hero.title.line1": { zh: "让 AI", en: "Make AI Models" },
     "hero.title.highlight": { zh: "推荐你的品牌", en: "Choose Your Brand" },
     "hero.subtitle": {
-        zh: "不只是 Google 排名。让 ChatGPT、DeepSeek、Claude 主动推荐你的产品。NutriSKU 通过生成式引擎优化（GEO），让 AI 搜索成为你的增长引擎。",
-        en: "Don't just rank on Google. Get recommended by ChatGPT, DeepSeek, and Claude. NutriSKU optimizes your product data so AI agents choose your brand as the answer.",
+        zh: "不只是 Google 排名。让 ChatGPT、DeepSeek、Claude 主动推荐你的产品。拾鸽通过生成式引擎优化（GEO），让 AI 搜索成为你的增长引擎。",
+        en: "Don't just rank on Google. Get recommended by ChatGPT, DeepSeek, and Claude. SkuGEO optimizes your product data so AI agents choose your brand as the answer.",
     },
     "hero.cta.primary": { zh: "免费诊断", en: "Start Free Audit" },
     "hero.cta.secondary": { zh: "观看演示", en: "Watch Demo" },
@@ -71,7 +71,7 @@ const translations = {
     // How it Works
     "howItWorks.badge": { zh: "工作流程", en: "How It Works" },
     "howItWorks.title.pre": { zh: "", en: "How " },
-    "howItWorks.title.brand": { zh: "NutriSKU", en: "NutriSKU" },
+    "howItWorks.title.brand": { zh: "拾鸽", en: "SkuGEO" },
     "howItWorks.title.post": { zh: " 如何运作", en: " Works" },
     "howItWorks.subtitle": {
         zh: "从商品数据到 AI 推荐，只需四步。",
@@ -124,14 +124,14 @@ const translations = {
     "demo.badge": { zh: "产品演示", en: "Product Demo" },
     "demo.title": { zh: "亲眼见证 GEO 内容生成", en: "See GEO Content Generation in Action" },
     "demo.subtitle": {
-        zh: "观看 NutriSKU 工作台如何在数分钟内完成从商品数据导入到 AI 优化内容生成的完整流程。",
-        en: "Watch how NutriSKU generates AI-optimized content from product data in minutes.",
+        zh: "观看拾鸽工作台如何在数分钟内完成从商品数据导入到 AI 优化内容生成的完整流程。",
+        en: "Watch how SkuGEO generates AI-optimized content from product data in minutes.",
     },
     "demo.placeholder": { zh: "演示视频加载中…", en: "Loading demo video…" },
 
     // PPT Showcase
     "showcase.badge": { zh: "产品手册", en: "Product Deck" },
-    "showcase.title": { zh: "深入了解 NutriSKU", en: "Explore NutriSKU In-Depth" },
+    "showcase.title": { zh: "深入了解拾鸽", en: "Explore SkuGEO In-Depth" },
     "showcase.subtitle": {
         zh: "浏览我们的产品宣传手册，了解 GEO 如何重塑电商营销格局。",
         en: "Browse our product deck to learn how GEO reshapes e-commerce marketing.",
@@ -159,7 +159,7 @@ const translations = {
     "footer.careers": { zh: "加入我们", en: "Careers" },
     "footer.contact": { zh: "联系我们", en: "Contact" },
     "footer.pressKit": { zh: "媒体资源", en: "Press Kit" },
-    "footer.copyright": { zh: "© 2026 NutriSKU. 保留所有权利。", en: "© 2026 NutriSKU. All rights reserved." },
+    "footer.copyright": { zh: "© 2026 拾鸽 · SkuGEO. 保留所有权利。", en: "© 2026 SkuGEO. All rights reserved." },
     "footer.privacy": { zh: "隐私政策", en: "Privacy Policy" },
     "footer.terms": { zh: "服务条款", en: "Terms of Service" },
     "footer.cookies": { zh: "Cookie 设置", en: "Cookies" },

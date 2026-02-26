@@ -1,27 +1,32 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- 背景：极简暗黑色 -->
-    <rect width="32" height="32" rx="8" fill="#0c0c10"/>
-    
-    <!-- 渐变色定义 (香槟金过渡品牌金到琥珀色) -->
-    <defs>
-        <linearGradient id="goldGradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#f5e6d3"/>
-            <stop offset="0.5" stop-color="#c8a97e"/>
-            <stop offset="1" stop-color="#d97706"/>
-        </linearGradient>
-    </defs>
-    
-    <!-- 放大镜与 AI 星形图标 (按 32x32 比例缩放并居中) -->
-    <g transform="translate(6, 6) scale(0.625)">
-        <!-- 放大镜镜框 -->
-        <circle cx="16" cy="16" r="14" stroke="url(#goldGradient)" stroke-width="3.5" stroke-linecap="round"/>
-        <!-- 放大镜手柄 -->
-        <path d="M 26 26 L 33 33" stroke="url(#goldGradient)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-        
-        <!-- 微笑弧线 -->
-        <path d="M 10 18 Q 16 26 22 18" stroke="url(#goldGradient)" stroke-width="3" stroke-linecap="round" fill="none"/>
-        
-        <!-- AI 发光星形 -->
-        <path d="M 12 5 Q 12 10 7 10 Q 12 10 12 15 Q 12 10 17 10 Q 12 10 12 5 Z" fill="url(#goldGradient)"/>
-    </g>
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>SkuGEO</title>
+  <defs>
+    <!-- 金色渐变：放大镜圆框 -->
+    <linearGradient id="goldRing" x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f5e6d3"/>
+      <stop offset="0.5" stop-color="#c8a97e"/>
+      <stop offset="1" stop-color="#d97706"/>
+    </linearGradient>
+    <!-- 白→浅蓝渐变：AI四芒星 -->
+    <linearGradient id="aiStar" x1="14" y1="6" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#93c5fd"/>
+    </linearGradient>
+    <!-- 放大镜阴影滤镜：模拟纸张空间感 -->
+    <filter id="lensGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1.5" dy="2.5" stdDeviation="2.5" flood-color="#c8a97e" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- 放大镜（阴影+金色圆框+手柄） -->
+  <g filter="url(#lensGlow)">
+    <circle cx="20" cy="20" r="14.5" stroke="url(#goldRing)" stroke-width="3" fill="none"/>
+    <line x1="30.5" y1="30.5" x2="42" y2="42" stroke="url(#goldRing)" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- 微笑弧线（继承云享智慧设计哲学） -->
+  <path d="M 13 22 Q 20 30 27 22" stroke="url(#goldRing)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+  <!-- AI四芒星（白→浅蓝，作为"独眼"） -->
+  <path d="M16 8 Q16 14 10 14 Q16 14 16 20 Q16 14 22 14 Q16 14 16 8 Z" fill="url(#aiStar)"/>
 </svg>

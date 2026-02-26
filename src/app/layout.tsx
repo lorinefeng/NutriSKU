@@ -26,11 +26,11 @@ const notoSansSC = Noto_Sans_SC({
 });
 
 export const metadata: Metadata = {
-  title: "NutriSKU — 让 AI 推荐你的品牌 | GEO 生成式引擎优化",
+  title: "SkuGEO — 让 AI 推荐你的品牌 | GEO 生成式引擎优化",
   description:
-    "不只是 Google 排名。让 ChatGPT、DeepSeek、Claude 主动推荐你的产品。NutriSKU 通过 GEO 策略，让 AI 搜索成为你的增长引擎。",
+    "不只是 Google 排名。让 ChatGPT、DeepSeek、Claude 主动推荐你的产品。SkuGEO 通过 GEO 策略，让 AI 搜索成为你的增长引擎。",
   icons: {
-    icon: [{ url: "/favicon.svg?v=20260225", type: "image/svg+xml" }],
+    icon: [{ url: "/favicon.svg?v=20260226", type: "image/svg+xml" }],
   },
 };
 

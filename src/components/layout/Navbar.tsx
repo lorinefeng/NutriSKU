@@ -42,7 +42,7 @@ export function Navbar() {
                     >
                         <Image
                             src={theme === "light" ? "/logo-light.svg" : "/logo.svg"}
-                            alt="NutriSKU"
+                            alt="SkuGEO"
                             width={176}
                             height={48}
                             className="h-8 md:h-9 w-auto"

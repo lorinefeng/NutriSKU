@@ -51,7 +51,7 @@ export function Footer() {
                             <div className="rounded-xl px-2 py-1 bg-[rgba(12,12,16,0.88)] border border-[rgba(200,169,126,0.22)]">
                                 <Image
                                     src="/logo.svg"
-                                    alt="NutriSKU"
+                                    alt="SkuGEO"
                                     width={164}
                                     height={44}
                                     className="h-8 w-auto"
