@@ -48,15 +48,13 @@ export function Footer() {
                     {/* Brand column */}
                     <div className="md:col-span-2">
                         <Link href="/" className="inline-flex items-center gap-2.5 mb-5">
-                            <div className="rounded-xl px-2 py-1 bg-[rgba(12,12,16,0.88)] border border-[rgba(200,169,126,0.22)]">
-                                <Image
-                                    src={locale === "zh" ? "/logo-zh.svg" : "/logo.svg"}
-                                    alt="SkuGEO"
-                                    width={164}
-                                    height={44}
-                                    className="h-8 w-auto"
-                                />
-                            </div>
+                            <Image
+                                src={locale === "zh" ? "/logo-zh.svg" : "/logo.svg"}
+                                alt="SkuGEO"
+                                width={164}
+                                height={44}
+                                className="h-8 w-auto"
+                            />
                         </Link>
                         <p className="text-sm text-[var(--color-text-muted)] max-w-xs leading-relaxed">
                             {t("footer.desc")}
