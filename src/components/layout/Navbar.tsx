@@ -41,7 +41,11 @@ export function Navbar() {
                         )}
                     >
                         <Image
-                            src={theme === "light" ? "/logo-light.svg" : "/logo.svg"}
+                            src={
+                                theme === "light"
+                                    ? locale === "zh" ? "/logo-zh-light.svg" : "/logo-light.svg"
+                                    : locale === "zh" ? "/logo-zh.svg" : "/logo.svg"
+                            }
                             alt="SkuGEO"
                             width={176}
                             height={48}

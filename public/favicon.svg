@@ -1,32 +1,36 @@
-<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <title>SkuGEO</title>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>SkuGEO Favicon</title>
   <defs>
     <!-- 金色渐变：放大镜圆框 -->
-    <linearGradient id="goldRing" x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+    <linearGradient id="goldRing" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#f5e6d3"/>
       <stop offset="0.5" stop-color="#c8a97e"/>
-      <stop offset="1" stop-color="#d97706"/>
+      <stop offset="1" stop-color="#b45309"/>
     </linearGradient>
     <!-- 白→浅蓝渐变：AI四芒星 -->
-    <linearGradient id="aiStar" x1="14" y1="6" x2="20" y2="20" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#ffffff"/>
-      <stop offset="1" stop-color="#93c5fd"/>
-    </linearGradient>
+    <radialGradient id="aiStar" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#bae6fd"/>
+    </radialGradient>
     <!-- 放大镜阴影滤镜：模拟纸张空间感 -->
-    <filter id="lensGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="1.5" dy="2.5" stdDeviation="2.5" flood-color="#c8a97e" flood-opacity="0.35"/>
+    <filter id="lensGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3.5" flood-color="#c8a97e" flood-opacity="0.45"/>
     </filter>
   </defs>
 
-  <!-- 放大镜（阴影+金色圆框+手柄） -->
-  <g filter="url(#lensGlow)">
-    <circle cx="20" cy="20" r="14.5" stroke="url(#goldRing)" stroke-width="3" fill="none"/>
-    <line x1="30.5" y1="30.5" x2="42" y2="42" stroke="url(#goldRing)" stroke-width="4" stroke-linecap="round"/>
+  <!-- 放大镜整体向下向右偏移一点，居中 -->
+  <g transform="translate(6, 6)">
+    <g filter="url(#lensGlow)">
+      <!-- 放大镜镜头 -->
+      <circle cx="22" cy="22" r="18" stroke="url(#goldRing)" stroke-width="4.5" fill="none"/>
+      <!-- 放大镜手柄 -->
+      <line x1="35" y1="35" x2="52" y2="52" stroke="url(#goldRing)" stroke-width="6" stroke-linecap="round"/>
+    </g>
+
+    <!-- 微笑弧线 -->
+    <path d="M 12 25 Q 22 35 32 25" stroke="url(#goldRing)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+    <!-- AI四芒星（点亮左眼上方）大且闪耀 -->
+    <path d="M 17 6 Q 17 14 9 14 Q 17 14 17 22 Q 17 14 25 14 Q 17 14 17 6 Z" fill="url(#aiStar)"/>
   </g>
-
-  <!-- 微笑弧线（继承云享智慧设计哲学） -->
-  <path d="M 13 22 Q 20 30 27 22" stroke="url(#goldRing)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-
-  <!-- AI四芒星（白→浅蓝，作为"独眼"） -->
-  <path d="M16 8 Q16 14 10 14 Q16 14 16 20 Q16 14 22 14 Q16 14 16 8 Z" fill="url(#aiStar)"/>
 </svg>

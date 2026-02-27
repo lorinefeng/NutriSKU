@@ -1,5 +1,5 @@
 <svg width="220" height="60" viewBox="0 0 220 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <title>SkuGEO Logomark (Light)</title>
+  <title>拾鸽 Logomark (Light)</title>
   <defs>
     <!-- 金色渐变 -->
     <linearGradient id="goldRing" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
@@ -10,19 +10,17 @@
       <stop offset="0" stop-color="#92400e"/>
       <stop offset="1" stop-color="#c8a97e"/>
     </linearGradient>
-    <!-- 浅蓝色AI星 -->
+    <!-- 浅蓝星 -->
     <radialGradient id="aiStar" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#eff6ff"/>
       <stop offset="100%" stop-color="#60a5fa"/>
     </radialGradient>
-    <!-- 阴影 -->
     <filter id="lensGlow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="1.5" dy="2.5" stdDeviation="2.5" flood-color="#c8a97e" flood-opacity="0.15"/>
     </filter>
   </defs>
 
-  <!-- 左侧标志 -->
-  <g transform="translate(10, 8)">
+  <g transform="translate(16, 8)">
     <g filter="url(#lensGlow)">
       <circle cx="22" cy="22" r="16" stroke="url(#goldRing)" stroke-width="3.5" fill="none"/>
       <line x1="33" y1="33" x2="44" y2="44" stroke="url(#goldRing)" stroke-width="4.5" stroke-linecap="round"/>
@@ -31,28 +29,25 @@
     <path d="M 17 8 Q 17 15 10 15 Q 17 15 17 22 Q 17 15 24 15 Q 17 15 17 8 Z" fill="url(#aiStar)"/>
   </g>
 
-  <!-- 右侧排版 (仅字体颜色变为深色 #0F172A) -->
   <text
-    x="68"
+    x="80"
     y="43"
-    font-family="'Didot', 'Bodoni MT', 'Times New Roman', serif"
+    font-family="'Songti SC', 'STSong', 'Noto Serif SC', 'SimSun', serif"
     font-weight="600"
-    font-style="italic"
-    font-size="34"
+    font-size="32"
     fill="#0F172A"
-    letter-spacing="0.5"
-  >Sku</text>
+    letter-spacing="4"
+  >拾</text>
 
   <text
-    x="128"
+    x="125"
     y="43"
-    font-family="'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
-    font-weight="700"
-    font-size="33"
+    font-family="'Songti SC', 'STSong', 'Noto Serif SC', 'SimSun', serif"
+    font-weight="600"
+    font-size="32"
     fill="url(#geoGold)"
-    letter-spacing="-0.5"
-  >GEO</text>
+    letter-spacing="1"
+  >鸽</text>
 
-  <!-- 底部细金线 -->
-  <line x1="68" y1="51" x2="190" y2="51" stroke="url(#goldRing)" stroke-width="1" stroke-linecap="round" opacity="0.3"/>
+  <line x1="77" y1="51" x2="167" y2="51" stroke="url(#goldRing)" stroke-width="1" stroke-linecap="round" opacity="0.3"/>
 </svg>

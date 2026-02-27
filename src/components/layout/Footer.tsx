@@ -5,7 +5,7 @@ import { useTranslation } from "@/lib/i18n";
 import Image from "next/image";
 
 export function Footer() {
-    const { t } = useTranslation();
+    const { locale, t } = useTranslation();
 
     const columns = [
         {
@@ -50,7 +50,7 @@ export function Footer() {
                         <Link href="/" className="inline-flex items-center gap-2.5 mb-5">
                             <div className="rounded-xl px-2 py-1 bg-[rgba(12,12,16,0.88)] border border-[rgba(200,169,126,0.22)]">
                                 <Image
-                                    src="/logo.svg"
+                                    src={locale === "zh" ? "/logo-zh.svg" : "/logo.svg"}
                                     alt="SkuGEO"
                                     width={164}
                                     height={44}
