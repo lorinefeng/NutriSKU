@@ -29,7 +29,11 @@ function getInitialTheme(): Theme {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-    const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
+    const [theme, setTheme] = useState<Theme>("dark");
+
+    useEffect(() => {
+        setTheme(getInitialTheme());
+    }, []);
 
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme);

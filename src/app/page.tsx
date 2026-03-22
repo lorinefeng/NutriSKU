@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { VisibilityAudit } from "@/components/sections/VisibilityAudit";
 import { Features } from "@/components/sections/Features";
 import { BrandMatrix } from "@/components/sections/BrandMatrix";
 import { HowItWorks } from "@/components/sections/HowItWorks";
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <Hero />
+      <VisibilityAudit />
       <Features />
       <BrandMatrix />
       <HowItWorks />

@@ -90,13 +90,17 @@ export function Hero() {
                         variants={itemVariants}
                         className="flex flex-col sm:flex-row gap-3 items-center justify-center w-full mb-10"
                     >
-                        <GlowButton variant="gold" size="lg" className="w-full sm:w-auto group">
-                            {t("hero.cta.primary")}
-                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </GlowButton>
-                        <GlowButton variant="outline" size="lg" className="w-full sm:w-auto">
-                            {t("hero.cta.secondary")}
-                        </GlowButton>
+                        <a href="#diagnosis" className="w-full sm:w-auto">
+                            <GlowButton variant="gold" size="lg" className="w-full sm:w-auto group">
+                                {t("hero.cta.primary")}
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </GlowButton>
+                        </a>
+                        <a href="#demo" className="w-full sm:w-auto">
+                            <GlowButton variant="outline" size="lg" className="w-full sm:w-auto">
+                                {t("hero.cta.secondary")}
+                            </GlowButton>
+                        </a>
                     </motion.div>
 
                     {/* Stats */}

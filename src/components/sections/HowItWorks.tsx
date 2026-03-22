@@ -145,7 +145,7 @@ export function HowItWorks() {
                         </div>
                         <p className="text-sm text-[var(--color-text-muted)]">{t("howItWorks.cta.question")}</p>
                         <a
-                            href="#"
+                            href="#diagnosis"
                             className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#c8a97e] to-[#b8956a] text-[#0c0c10] font-semibold hover:shadow-[0_0_30px_rgba(200,169,126,0.25)] transition-all duration-300"
                         >
                             {t("howItWorks.cta.button")}

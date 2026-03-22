@@ -1,29 +1,9 @@
 import type { Metadata } from "next";
-import { DM_Sans, Playfair_Display, Noto_Sans_SC } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { LanguageProvider } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
 import "./globals.css";
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-});
-
-const notoSansSC = Noto_Sans_SC({
-  subsets: ["latin"],
-  variable: "--font-noto-sans-sc",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "SkuGEO — 让 AI 推荐你的品牌 | GEO 生成式引擎优化",
@@ -42,7 +22,7 @@ export default function RootLayout({
   return (
     <html
       lang="zh"
-      className={`scroll-smooth ${dmSans.variable} ${playfair.variable} ${notoSansSC.variable}`}
+      className="scroll-smooth"
     >
       <body className="bg-[var(--color-void)] text-[var(--color-text-primary)] antialiased transition-colors duration-500">
         <ThemeProvider>

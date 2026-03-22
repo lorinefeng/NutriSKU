@@ -7,6 +7,7 @@ type Locale = "zh" | "en";
 const translations = {
     // Navbar
     "nav.features": { zh: "核心能力", en: "Features" },
+    "nav.diagnosis": { zh: "免费诊断", en: "Free Audit" },
     "nav.howItWorks": { zh: "工作流程", en: "How it Works" },
     "nav.demo": { zh: "产品演示", en: "Demo" },
     "nav.showcase": { zh: "产品手册", en: "Showcase" },
