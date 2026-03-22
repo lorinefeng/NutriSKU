@@ -267,9 +267,9 @@ export function VisibilityAudit() {
             <Radar className="w-3.5 h-3.5" />
             <span>{isZh ? "免费 AI 可见度诊断" : "Free AI Visibility Audit"}</span>
           </div>
-          <div className="grid lg:grid-cols-[minmax(0,0.8fr)_minmax(640px,1.2fr)] xl:grid-cols-[minmax(0,0.74fr)_minmax(720px,1.26fr)] gap-8 xl:gap-14 items-start">
-            <div className="max-w-[560px] xl:pt-3">
-              <h2 className="text-3xl md:text-4xl xl:text-[4.35rem] xl:leading-[1.01] font-bold tracking-tight text-[var(--color-text-primary)] mb-4">
+          <div className="grid lg:grid-cols-[minmax(360px,0.92fr)_minmax(620px,1.08fr)] 2xl:grid-cols-[minmax(420px,0.94fr)_minmax(700px,1.06fr)] gap-8 xl:gap-12 items-start">
+            <div className="max-w-[620px]">
+              <h2 className="text-3xl md:text-4xl xl:text-[3.85rem] 2xl:text-[4.25rem] xl:leading-[1.03] font-bold tracking-tight text-[var(--color-text-primary)] mb-4">
                 {isZh ? "别再猜 AI 会不会推荐你。" : "Stop guessing whether AI recommends you."}
                 <br />
                 <span className="gradient-text-gold">
@@ -309,7 +309,7 @@ export function VisibilityAudit() {
               </div>
             </div>
 
-            <div className="relative w-full max-w-none lg:min-w-[640px] xl:min-w-[720px] lg:ml-auto rounded-[28px] border border-[rgba(200,169,126,0.18)] bg-[linear-gradient(180deg,var(--color-glass),rgba(255,255,255,0.02))] backdrop-blur-xl p-5 md:p-6 xl:p-7 shadow-[0_30px_80px_rgba(0,0,0,0.22)] overflow-hidden">
+            <div className="relative w-full max-w-[860px] lg:ml-auto rounded-[28px] border border-[rgba(200,169,126,0.18)] bg-[linear-gradient(180deg,var(--color-glass),rgba(255,255,255,0.02))] backdrop-blur-xl p-5 md:p-6 xl:p-7 shadow-[0_30px_80px_rgba(0,0,0,0.22)] overflow-hidden">
               <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(200,169,126,0.3)] to-transparent" />
               <div className="flex items-center justify-between gap-3 mb-5">
                 <div>
