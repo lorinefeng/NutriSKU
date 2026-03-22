@@ -28,9 +28,26 @@ function heuristicCompetitors(text: string, targetName: string) {
   return [...buckets];
 }
 
+function getSubjectContext(form: IntakeForm, locale: Locale) {
+  if (form.entityType === 'brand') {
+    return {
+      marketAnchor: form.industry || (locale === 'zh' ? '所属行业' : 'the industry'),
+      audienceAnchor: form.targetAudience || (locale === 'zh' ? '目标客群' : 'the target audience'),
+      differentiator: form.brandPositioning || form.coreOfferings || (locale === 'zh' ? '品牌定位' : 'brand positioning'),
+    };
+  }
+
+  return {
+    marketAnchor: form.priceBand || (locale === 'zh' ? '目标价格带' : 'the target price band'),
+    audienceAnchor: form.targetAudience || (locale === 'zh' ? '目标人群' : 'the target audience'),
+    differentiator: form.sellingPoints || (locale === 'zh' ? '核心卖点' : 'key USP'),
+  };
+}
+
 function buildHeuristicAnswer(raw: { questionId: string; question: string; rawSnippet: string; links: string[] }, form: IntakeForm, locale: Locale): PlatformAnswer {
   const mentionsTarget = raw.rawSnippet.includes(form.name);
   const competitors = heuristicCompetitors(raw.rawSnippet, form.name).slice(0, 3);
+  const subject = form.entityType === 'brand' ? (locale === 'zh' ? '该品牌' : 'the brand') : form.name;
   return {
     questionId: raw.questionId,
     question: raw.question,
@@ -38,11 +55,11 @@ function buildHeuristicAnswer(raw: { questionId: string; question: string; rawSn
     summary:
       locale === 'zh'
         ? mentionsTarget
-          ? `回答提到了 ${form.name}，但同时也在强调其他竞品，推荐位并不稳。`
-          : `回答没有稳定提到 ${form.name}，更像是在把问题导向其他竞品或泛品类推荐。`
+          ? `回答提到了 ${subject}，但同时也在强调其他竞品，推荐位并不稳。`
+          : `回答没有稳定提到 ${subject}，更像是在把问题导向其他竞品或泛品类推荐。`
         : mentionsTarget
-          ? `The answer mentioned ${form.name}, but the recommendation slot is still shared with competitors.`
-          : `The answer did not stably surface ${form.name}; it leaned toward rivals or generic category picks.`,
+          ? `The answer mentioned ${subject}, but the recommendation slot is still shared with competitors.`
+          : `The answer did not stably surface ${subject}; it leaned toward rivals or generic category picks.`,
     mentionsTarget,
     competitors: raw.links.length ? raw.links.slice(0, 3) : competitors,
     riskLevel: mentionsTarget ? 'medium' : 'high',
@@ -144,6 +161,7 @@ function buildHeuristicOverall(form: IntakeForm, locale: Locale, platformResults
   const answers = platformResults.flatMap((item) => item.answers);
   const missingCount = answers.filter((item) => !item.mentionsTarget).length;
   const competitorNames = [...new Set(answers.flatMap((item) => item.competitors).filter(Boolean))].slice(0, 3);
+  const context = getSubjectContext(form, locale);
   return {
     headline:
       locale === 'zh'
@@ -155,8 +173,12 @@ function buildHeuristicOverall(form: IntakeForm, locale: Locale, platformResults
           : `${form.name} is starting to appear, but it still lacks a stable recommendation lead.`,
     subhead:
       locale === 'zh'
-        ? `${form.name} 在 ${form.category || '该品类'} 的部分问题里已有露出，但价格带、人群或场景问题仍可能被竞品占位。`
-        : `${form.name} appears in some ${form.category || 'category'} prompts, but rivals still occupy price-band, audience, or scenario queries.`,
+        ? form.entityType === 'brand'
+          ? `${form.name} 在 ${form.industry || '该行业'} 的部分问题里已有露出，但行业、人群或品牌定位问题仍可能被竞品占位。`
+          : `${form.name} 在 ${form.category || '该品类'} 的部分问题里已有露出，但价格带、人群或场景问题仍可能被竞品占位。`
+        : form.entityType === 'brand'
+          ? `${form.name} appears in some ${form.industry || 'industry'} prompts, but rivals still occupy industry, audience, or positioning queries.`
+          : `${form.name} appears in some ${form.category || 'category'} prompts, but rivals still occupy price-band, audience, or scenario queries.`,
     visibilityLevel: missingCount >= 3 ? 'low' : missingCount >= 1 ? 'medium' : 'high',
     keyRisks:
       locale === 'zh'
@@ -173,14 +195,22 @@ function buildHeuristicOverall(form: IntakeForm, locale: Locale, platformResults
     suggestions:
       locale === 'zh'
         ? [
-            `优先围绕 ${form.priceBand || '目标价格带'} + ${form.targetAudience || '目标人群'} 生成评测内容。`,
-            `让 ${form.name} 与 ${form.sellingPoints || '核心卖点'} 在可检索内容中高频共现。`,
-            '补充更强的评测、对比、问答与第三方背书内容。',
+            form.entityType === 'brand'
+              ? `优先围绕 ${context.marketAnchor} + ${context.audienceAnchor} 生成品牌对比与口碑内容。`
+              : `优先围绕 ${context.marketAnchor} + ${context.audienceAnchor} 生成评测内容。`,
+            `让 ${form.name} 与 ${context.differentiator} 在可检索内容中高频共现。`,
+            form.entityType === 'brand'
+              ? '补充更强的品牌介绍、行业对比、客户案例与第三方背书内容。'
+              : '补充更强的评测、对比、问答与第三方背书内容。',
           ]
         : [
-            `Build comparison content around ${form.priceBand || 'the target price band'} and ${form.targetAudience || 'the target audience'}.`,
-            `Increase co-occurrence between ${form.name} and ${form.sellingPoints || 'its key USP'}.`,
-            'Add stronger reviews, comparisons, Q&A, and third-party proof content.',
+            form.entityType === 'brand'
+              ? `Build more comparison and reputation content around ${context.marketAnchor} and ${context.audienceAnchor}.`
+              : `Build comparison content around ${context.marketAnchor} and ${context.audienceAnchor}.`,
+            `Increase co-occurrence between ${form.name} and ${context.differentiator}.`,
+            form.entityType === 'brand'
+              ? 'Add stronger brand pages, industry comparisons, customer cases, and third-party proof.'
+              : 'Add stronger reviews, comparisons, Q&A, and third-party proof content.',
           ],
     platformResults,
   };
@@ -253,4 +283,3 @@ ${JSON.stringify(platformResults, null, 2)}`,
     return buildHeuristicOverall(form, locale, platformResults);
   }
 }
-

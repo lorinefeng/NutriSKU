@@ -74,7 +74,10 @@ export function VisibilityAudit() {
   const [platformProgress, setPlatformProgress] = useState<PlatformResult[]>(initialPlatforms);
 
   const isZh = locale === "zh";
-  const canGenerate = form.name.trim() && form.category.trim();
+  const isBrandMode = form.entityType === "brand";
+  const canGenerate = isBrandMode
+    ? form.name.trim() && form.industry.trim()
+    : form.name.trim() && form.category.trim();
 
   const selectedQuestions = useMemo(
     () => questions.filter((item) => selectedIds.includes(item.id)),
@@ -84,6 +87,24 @@ export function VisibilityAudit() {
   const handleInputChange = (key: keyof IntakeForm, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
+
+  const handleEntityTypeChange = (value: IntakeForm["entityType"]) => {
+    setForm((prev) => ({ ...prev, entityType: value }));
+  };
+
+  const productFields = [
+    ["name", isZh ? "商品名称" : "Product name", isZh ? "例如：轻量防风通勤夹克" : "e.g. commuter wind jacket"],
+    ["category", isZh ? "所属品类" : "Category", isZh ? "例如：夹克 / 男装" : "e.g. jackets / menswear"],
+    ["priceBand", isZh ? "价格带" : "Price band", isZh ? "例如：300-500 元" : "e.g. RMB 300-500"],
+    ["targetAudience", isZh ? "目标人群" : "Target audience", isZh ? "例如：城市白领 / 年轻妈妈" : "e.g. urban commuters"],
+  ] as const;
+
+  const brandFields = [
+    ["name", isZh ? "品牌名称" : "Brand name", isZh ? "例如：某营养品牌 / 某 SaaS 品牌" : "e.g. a nutrition or SaaS brand"],
+    ["industry", isZh ? "所属行业" : "Industry", isZh ? "例如：营养健康 / 企业服务" : "e.g. nutrition / B2B SaaS"],
+    ["companyType", isZh ? "企业类型" : "Company type", isZh ? "例如：消费品牌 / SaaS / 连锁机构" : "e.g. consumer brand / SaaS / chain"],
+    ["targetAudience", isZh ? "目标客群" : "Target audience", isZh ? "例如：健身人群 / 中小企业主" : "e.g. fitness users / SMB owners"],
+  ] as const;
 
   const handleGenerateQuestions = async () => {
     if (!canGenerate) return;
@@ -255,20 +276,20 @@ export function VisibilityAudit() {
       <div className="absolute top-12 left-[10%] w-56 h-56 rounded-full bg-[rgba(200,169,126,0.07)] blur-3xl" />
       <div className="absolute bottom-8 right-[8%] w-72 h-72 rounded-full bg-[rgba(200,169,126,0.06)] blur-3xl" />
 
-      <div className="container mx-auto max-w-[1480px] px-4 md:px-6 relative z-10">
+      <div className="container mx-auto max-w-[1280px] px-5 md:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl"
+          className="w-full"
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[rgba(200,169,126,0.18)] text-[#c8a97e] text-xs md:text-sm mb-5">
             <Radar className="w-3.5 h-3.5" />
             <span>{isZh ? "免费 AI 可见度诊断" : "Free AI Visibility Audit"}</span>
           </div>
-          <div className="grid lg:grid-cols-[minmax(360px,0.92fr)_minmax(620px,1.08fr)] 2xl:grid-cols-[minmax(420px,0.94fr)_minmax(700px,1.06fr)] gap-8 xl:gap-12 items-start">
-            <div className="max-w-[620px]">
+          <div className="grid xl:grid-cols-[0.9fr_1.1fr] gap-10 xl:gap-12 items-start">
+            <div className="max-w-[560px] xl:pt-3">
               <h2 className="text-3xl md:text-4xl xl:text-[3.85rem] 2xl:text-[4.25rem] xl:leading-[1.03] font-bold tracking-tight text-[var(--color-text-primary)] mb-4">
                 {isZh ? "别再猜 AI 会不会推荐你。" : "Stop guessing whether AI recommends you."}
                 <br />
@@ -309,7 +330,7 @@ export function VisibilityAudit() {
               </div>
             </div>
 
-            <div className="relative w-full max-w-[860px] lg:ml-auto rounded-[28px] border border-[rgba(200,169,126,0.18)] bg-[linear-gradient(180deg,var(--color-glass),rgba(255,255,255,0.02))] backdrop-blur-xl p-5 md:p-6 xl:p-7 shadow-[0_30px_80px_rgba(0,0,0,0.22)] overflow-hidden">
+            <div className="relative w-full max-w-[760px] xl:ml-auto rounded-[28px] border border-[rgba(200,169,126,0.18)] bg-[linear-gradient(180deg,var(--color-glass),rgba(255,255,255,0.02))] backdrop-blur-xl p-5 md:p-6 xl:p-7 shadow-[0_30px_80px_rgba(0,0,0,0.22)] overflow-hidden">
               <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(200,169,126,0.3)] to-transparent" />
               <div className="flex items-center justify-between gap-3 mb-5">
                 <div>
@@ -340,7 +361,7 @@ export function VisibilityAudit() {
                         <button
                           key={value}
                           type="button"
-                          onClick={() => handleInputChange("entityType", value)}
+                          onClick={() => handleEntityTypeChange(value)}
                           className={cn(
                             "rounded-2xl border px-4 py-3 text-left transition-all",
                             form.entityType === value
@@ -363,12 +384,7 @@ export function VisibilityAudit() {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-3">
-                      {[
-                        ["name", isZh ? "名称" : "Name", isZh ? "例如：轻量防风通勤夹克" : "e.g. commuter jacket"],
-                        ["category", isZh ? "所属品类" : "Category", isZh ? "例如：夹克 / 男装" : "e.g. jackets / menswear"],
-                        ["priceBand", isZh ? "价格带" : "Price band", isZh ? "例如：300-500 元" : "e.g. RMB 300-500"],
-                        ["targetAudience", isZh ? "目标人群" : "Target audience", isZh ? "例如：城市白领 / 年轻妈妈" : "e.g. urban commuters"],
-                      ].map(([key, label, placeholder]) => (
+                      {(isBrandMode ? brandFields : productFields).map(([key, label, placeholder]) => (
                         <label key={key} className="block">
                           <span className="mb-2 block text-xs uppercase tracking-[0.16em] text-[var(--color-text-muted)]">{label}</span>
                           <input
@@ -382,22 +398,57 @@ export function VisibilityAudit() {
                     </div>
 
                     <label className="block">
-                      <span className="mb-2 block text-xs uppercase tracking-[0.16em] text-[var(--color-text-muted)]">{isZh ? "官网或商品链接" : "Website or product URL"}</span>
+                      <span className="mb-2 block text-xs uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+                        {isBrandMode
+                          ? isZh ? "官网链接" : "Website URL"
+                          : isZh ? "官网或商品链接" : "Website or product URL"}
+                      </span>
                       <input
                         value={form.url}
                         onChange={(event) => handleInputChange("url", event.target.value)}
-                        placeholder={isZh ? "选填，用于问题生成和后续证据抽取" : "Optional, for richer prompt grounding"}
+                        placeholder={
+                          isBrandMode
+                            ? isZh ? "选填，用于品牌定位和后续证据抽取" : "Optional, for richer brand grounding"
+                            : isZh ? "选填，用于问题生成和后续证据抽取" : "Optional, for richer prompt grounding"
+                        }
                         className="w-full rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-sm text-[var(--color-text-primary)] outline-none placeholder:text-[var(--color-text-dim)] focus:border-[rgba(200,169,126,0.4)]"
                       />
                     </label>
 
                     <label className="block">
-                      <span className="mb-2 block text-xs uppercase tracking-[0.16em] text-[var(--color-text-muted)]">{isZh ? "核心卖点" : "Core selling points"}</span>
+                      <span className="mb-2 block text-xs uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+                        {isBrandMode
+                          ? isZh ? "品牌定位" : "Brand positioning"
+                          : isZh ? "核心卖点" : "Core selling points"}
+                      </span>
                       <textarea
-                        value={form.sellingPoints}
-                        onChange={(event) => handleInputChange("sellingPoints", event.target.value)}
-                        placeholder={isZh ? "可填写 1-3 个，用逗号分隔，例如：防风、耐穿、适合通勤" : "1-3 points separated by commas"}
+                        value={isBrandMode ? form.brandPositioning : form.sellingPoints}
+                        onChange={(event) => handleInputChange(isBrandMode ? "brandPositioning" : "sellingPoints", event.target.value)}
+                        placeholder={
+                          isBrandMode
+                            ? isZh ? "例如：高客单抗衰、临床营养、服务中小企业" : "e.g. premium wellness, SMB growth, clinical nutrition"
+                            : isZh ? "可填写 1-3 个，用逗号分隔，例如：防风、耐穿、适合通勤" : "1-3 points separated by commas"
+                        }
                         rows={3}
+                        className="w-full rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-sm text-[var(--color-text-primary)] outline-none placeholder:text-[var(--color-text-dim)] focus:border-[rgba(200,169,126,0.4)]"
+                      />
+                    </label>
+
+                    <label className="block">
+                      <span className="mb-2 block text-xs uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+                        {isBrandMode
+                          ? isZh ? "核心业务 / 核心产品线" : "Core offerings / product lines"
+                          : isZh ? "市场范围" : "Market"}
+                      </span>
+                      <textarea
+                        value={isBrandMode ? form.coreOfferings : form.market}
+                        onChange={(event) => handleInputChange(isBrandMode ? "coreOfferings" : "market", event.target.value)}
+                        placeholder={
+                          isBrandMode
+                            ? isZh ? "例如：蛋白粉、营养补剂、体重管理方案" : "e.g. protein, supplements, weight programs"
+                            : isZh ? "例如：中国 / 东南亚 / 主要一二线城市" : "e.g. China / SEA / Tier 1-2 cities"
+                        }
+                        rows={2}
                         className="w-full rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-sm text-[var(--color-text-primary)] outline-none placeholder:text-[var(--color-text-dim)] focus:border-[rgba(200,169,126,0.4)]"
                       />
                     </label>

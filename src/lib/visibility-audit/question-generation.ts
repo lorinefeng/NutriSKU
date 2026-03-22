@@ -37,6 +37,30 @@ function normalizeQuestions(input: unknown, fallback: QuestionItem[]): QuestionI
 
 function buildPrompt(form: IntakeForm, locale: Locale) {
   const language = locale === 'zh' ? '中文' : 'English';
+  const detailBlock =
+    form.entityType === 'brand'
+      ? `用户输入：
+- 类型：品牌
+- 名称：${form.name || '未填写'}
+- 所属行业：${form.industry || '未填写'}
+- 企业类型：${form.companyType || '未填写'}
+- 官网：${form.url || '未填写'}
+- 品牌定位：${form.brandPositioning || '未填写'}
+- 核心业务：${form.coreOfferings || '未填写'}
+- 目标人群：${form.targetAudience || '未填写'}
+- 市场：${form.market || '未填写'}
+- 补充说明：${form.notes || '未填写'}`
+      : `用户输入：
+- 类型：商品
+- 名称：${form.name || '未填写'}
+- 品类：${form.category || '未填写'}
+- 链接：${form.url || '未填写'}
+- 价格带：${form.priceBand || '未填写'}
+- 核心卖点：${form.sellingPoints || '未填写'}
+- 目标人群：${form.targetAudience || '未填写'}
+- 市场：${form.market || '未填写'}
+- 补充说明：${form.notes || '未填写'}`;
+
   return `你是一个严谨的 GEO 问题设计 Agent。请围绕用户提供的品牌或商品信息，输出 10 个用于 AI 可见度检测的问题。
 
 输出要求：
@@ -48,18 +72,10 @@ function buildPrompt(form: IntakeForm, locale: Locale) {
 6. 问题必须像真实用户会问的问题，不能写成内部评估语句。
 7. coarse 和 medium 优先不直接点名目标品牌或商品全名；fine 可以更具体。
 8. 问题要覆盖：品类发现、价格带、人群、场景、具体识别。
+9. 如果类型是品牌，问题结构应更偏向行业、品牌定位、核心业务、企业类型和目标客群；不要生硬套用商品字段。
 9. 输出语言为${language}。
 
-用户输入：
-- 类型：${form.entityType}
-- 名称：${form.name || '未填写'}
-- 品类：${form.category || '未填写'}
-- 链接：${form.url || '未填写'}
-- 价格带：${form.priceBand || '未填写'}
-- 核心卖点：${form.sellingPoints || '未填写'}
-- 目标人群：${form.targetAudience || '未填写'}
-- 市场：${form.market || '未填写'}
-- 补充说明：${form.notes || '未填写'}
+${detailBlock}
 `;
 }
 
@@ -104,4 +120,3 @@ export async function generateQuestions(form: IntakeForm, locale: Locale): Promi
     };
   }
 }
-

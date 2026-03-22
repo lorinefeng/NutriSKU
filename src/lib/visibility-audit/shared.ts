@@ -10,9 +10,13 @@ export type IntakeForm = {
   entityType: EntityType;
   name: string;
   category: string;
+  industry: string;
+  companyType: string;
   url: string;
   priceBand: string;
   sellingPoints: string;
+  brandPositioning: string;
+  coreOfferings: string;
   targetAudience: string;
   market: string;
   notes: string;
@@ -72,9 +76,13 @@ export const defaultForm: IntakeForm = {
   entityType: 'product',
   name: '',
   category: '',
+  industry: '',
+  companyType: '',
   url: '',
   priceBand: '',
   sellingPoints: '',
+  brandPositioning: '',
+  coreOfferings: '',
   targetAudience: '',
   market: '中国',
   notes: '',
@@ -106,6 +114,14 @@ export function splitSellingPoints(value: string) {
 }
 
 export function generateFallbackQuestions(form: IntakeForm, locale: Locale): QuestionItem[] {
+  if (form.entityType === 'brand') {
+    return generateBrandFallbackQuestions(form, locale);
+  }
+
+  return generateProductFallbackQuestions(form, locale);
+}
+
+function generateProductFallbackQuestions(form: IntakeForm, locale: Locale): QuestionItem[] {
   const points = splitSellingPoints(form.sellingPoints);
   const category = form.category || (locale === 'zh' ? '该品类' : 'this category');
   const name = form.name || (locale === 'zh' ? '目标对象' : 'the target offering');
@@ -277,6 +293,184 @@ export function generateFallbackQuestions(form: IntakeForm, locale: Locale): Que
       question: `How competitive is ${name} in ${priceBand}?`,
       intent: 'Test price-anchor recognition.',
       riskFocus: 'Skewed answers mean rivals still own the price narrative.',
+      recommended: false,
+    },
+  ];
+}
+
+function generateBrandFallbackQuestions(form: IntakeForm, locale: Locale): QuestionItem[] {
+  const industry = form.industry || (locale === 'zh' ? '该行业' : 'this industry');
+  const name = form.name || (locale === 'zh' ? '目标品牌' : 'the target brand');
+  const audience = form.targetAudience || (locale === 'zh' ? '目标客户' : 'the target audience');
+  const positioning = form.brandPositioning || (locale === 'zh' ? '差异化定位' : 'brand positioning');
+  const offerings = splitSellingPoints(form.coreOfferings || form.sellingPoints);
+  const offerText = offerings[0] || (locale === 'zh' ? '核心业务' : 'core offering');
+  const companyType = form.companyType || (locale === 'zh' ? '企业类型' : 'company type');
+
+  if (locale === 'zh') {
+    return [
+      {
+        id: 'coarse_1',
+        granularity: 'coarse',
+        question: `${industry}里最近有哪些值得关注的品牌或公司？`,
+        intent: '观察品牌在行业级宽泛问题里的基础露出。',
+        riskFocus: '若完全不出现，说明行业级 AI 可见度偏弱。',
+        recommended: true,
+      },
+      {
+        id: 'coarse_2',
+        granularity: 'coarse',
+        question: `${audience}在选择${industry}服务时，最常被推荐哪些品牌？`,
+        intent: '观察 AI 在用户需求导向问题里优先推荐谁。',
+        riskFocus: '若竞品长期占位，说明用户问题场景未建立。',
+        recommended: true,
+      },
+      {
+        id: 'medium_1',
+        granularity: 'medium',
+        question: `如果重点关注${positioning}，${industry}里有哪些品牌更值得了解？`,
+        intent: '检测差异化定位是否已被 AI 感知。',
+        riskFocus: '若定位问题仍指向竞品，说明品牌心智未固化。',
+        recommended: true,
+      },
+      {
+        id: 'medium_2',
+        granularity: 'medium',
+        question: `${audience}如果想找主打${offerText}的${companyType}，会被推荐哪些品牌？`,
+        intent: '结合人群、业务和企业类型做更高意图检测。',
+        riskFocus: '若未出现，说明业务能力与目标人群没有建立关联。',
+        recommended: true,
+      },
+      {
+        id: 'medium_3',
+        granularity: 'medium',
+        question: `中国市场做${industry}的品牌里，谁在${audience}圈层里的口碑更高？`,
+        intent: '观察市场和人群双约束下的推荐格局。',
+        riskFocus: '若持续缺席，说明市场级内容信号不足。',
+        recommended: true,
+      },
+      {
+        id: 'medium_4',
+        granularity: 'medium',
+        question: `想找偏${positioning}路线的${industry}品牌，现在有哪些可以重点比较？`,
+        intent: '检查品牌定位是否能转化为可比较对象。',
+        riskFocus: '若 AI 无法把品牌放进比较集，说明内容锚点不清晰。',
+        recommended: false,
+      },
+      {
+        id: 'fine_1',
+        granularity: 'fine',
+        question: `${name}这个品牌怎么样？`,
+        intent: '检测品牌名称是否已经被 AI 直接识别。',
+        riskFocus: '若无法稳定识别，说明公开网页信息不足。',
+        recommended: true,
+      },
+      {
+        id: 'fine_2',
+        granularity: 'fine',
+        question: `${name}在${industry}里最大的特点是什么？`,
+        intent: '看 AI 是否已形成对品牌的稳定认知。',
+        riskFocus: '若回答空泛，说明品牌特征尚未沉淀。',
+        recommended: false,
+      },
+      {
+        id: 'fine_3',
+        granularity: 'fine',
+        question: `${name}适合${audience}吗？`,
+        intent: '检测品牌与目标客户的匹配是否被理解。',
+        riskFocus: '若匹配关系模糊，说明用户导向内容不够。',
+        recommended: false,
+      },
+      {
+        id: 'fine_4',
+        granularity: 'fine',
+        question: `${name}和同类${industry}品牌相比更偏向什么路线？`,
+        intent: '检测 AI 是否能把品牌放到竞争语境里定位。',
+        riskFocus: '若定位失焦，说明竞品对比内容密度不够。',
+        recommended: false,
+      },
+    ];
+  }
+
+  return [
+    {
+      id: 'coarse_1',
+      granularity: 'coarse',
+      question: `Which brands or companies are worth watching in ${industry} right now?`,
+      intent: 'Check base visibility in broad industry discovery.',
+      riskFocus: 'If absent, industry-level AI visibility is weak.',
+      recommended: true,
+    },
+    {
+      id: 'coarse_2',
+      granularity: 'coarse',
+      question: `Which brands does ${audience} usually get recommended in ${industry}?`,
+      intent: 'See who owns audience-led brand discovery.',
+      riskFocus: 'If rivals dominate, user-intent coverage is weak.',
+      recommended: true,
+    },
+    {
+      id: 'medium_1',
+      granularity: 'medium',
+      question: `Which ${industry} brands stand out if I care about ${positioning}?`,
+      intent: 'Test whether the positioning is understood by AI.',
+      riskFocus: 'If rivals absorb it, differentiation is weak.',
+      recommended: true,
+    },
+    {
+      id: 'medium_2',
+      granularity: 'medium',
+      question: `What ${companyType} brands focused on ${offerText} are best for ${audience}?`,
+      intent: 'Blend audience, company type, and core offering.',
+      riskFocus: 'If absent, the brand is not anchored to buying intent.',
+      recommended: true,
+    },
+    {
+      id: 'medium_3',
+      granularity: 'medium',
+      question: `In China, which ${industry} brands have the strongest reputation with ${audience}?`,
+      intent: 'Check market-plus-audience recommendation patterns.',
+      riskFocus: 'If absent, market-level authority is weak.',
+      recommended: true,
+    },
+    {
+      id: 'medium_4',
+      granularity: 'medium',
+      question: `Which ${industry} brands are most comparable if I want a ${positioning} angle?`,
+      intent: 'Test whether AI can place the brand into a comparison set.',
+      riskFocus: 'If not, comparison narratives are weak.',
+      recommended: false,
+    },
+    {
+      id: 'fine_1',
+      granularity: 'fine',
+      question: `What is ${name} like as a brand?`,
+      intent: 'Check whether AI can directly recognize the brand.',
+      riskFocus: 'Weak recognition suggests poor public-web coverage.',
+      recommended: true,
+    },
+    {
+      id: 'fine_2',
+      granularity: 'fine',
+      question: `What makes ${name} stand out in ${industry}?`,
+      intent: 'Test whether AI has a stable narrative for the brand.',
+      riskFocus: 'Vague answers suggest weak brand identity signals.',
+      recommended: false,
+    },
+    {
+      id: 'fine_3',
+      granularity: 'fine',
+      question: `Is ${name} a good fit for ${audience}?`,
+      intent: 'Check whether the brand is connected to the target audience.',
+      riskFocus: 'Weak matching means poor audience relevance.',
+      recommended: false,
+    },
+    {
+      id: 'fine_4',
+      granularity: 'fine',
+      question: `How is ${name} positioned against similar ${industry} brands?`,
+      intent: 'Test whether AI can place the brand in a competitive frame.',
+      riskFocus: 'Blurry positioning means weak comparative content.',
       recommended: false,
     },
   ];
