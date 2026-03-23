@@ -44,7 +44,11 @@ function getSubjectContext(form: IntakeForm, locale: Locale) {
   };
 }
 
-function buildHeuristicAnswer(raw: { questionId: string; question: string; rawSnippet: string; links: string[] }, form: IntakeForm, locale: Locale): PlatformAnswer {
+function buildHeuristicAnswer(
+  raw: { questionId: string; question: string; rawSnippet: string; screenshotDataUrl?: string; links: string[] },
+  form: IntakeForm,
+  locale: Locale
+): PlatformAnswer {
   const mentionsTarget = raw.rawSnippet.includes(form.name);
   const competitors = heuristicCompetitors(raw.rawSnippet, form.name).slice(0, 3);
   const subject = form.entityType === 'brand' ? (locale === 'zh' ? '该品牌' : 'the brand') : form.name;
@@ -52,6 +56,7 @@ function buildHeuristicAnswer(raw: { questionId: string; question: string; rawSn
     questionId: raw.questionId,
     question: raw.question,
     rawSnippet: raw.rawSnippet,
+    screenshotDataUrl: raw.screenshotDataUrl,
     summary:
       locale === 'zh'
         ? mentionsTarget
@@ -134,6 +139,7 @@ export async function summarizePlatformResult(rawResult: PlatformAuditRawResult,
         questionId: raw.questionId,
         question: raw.question,
         rawSnippet: raw.rawSnippet,
+        screenshotDataUrl: raw.screenshotDataUrl,
         summary: typeof modelAnswer.summary === 'string' ? modelAnswer.summary : raw.rawSnippet.slice(0, 180),
         mentionsTarget: Boolean(modelAnswer.mentionsTarget),
         competitors: Array.isArray(modelAnswer.competitors)
@@ -159,6 +165,48 @@ export async function summarizePlatformResult(rawResult: PlatformAuditRawResult,
 
 function buildHeuristicOverall(form: IntakeForm, locale: Locale, platformResults: PlatformResult[]): AuditResult {
   const answers = platformResults.flatMap((item) => item.answers);
+  const completedCount = platformResults.filter((item) => item.status === 'completed' && item.answers.length > 0).length;
+  const failureNotes = platformResults.map((item) => item.note).filter(Boolean).slice(0, 2) as string[];
+
+  if (completedCount === 0 || answers.length === 0) {
+    return {
+      headline:
+        locale === 'zh'
+          ? '本轮没有拿到足够的真实平台回答，无法输出可信的推荐结论。'
+          : 'This run did not capture enough live platform answers to support a credible recommendation conclusion.',
+      subhead:
+        locale === 'zh'
+          ? `${form.name || '当前对象'} 的平台检测被登录态、风控或运行环境限制打断。报告会保留真实失败状态，不会伪造内容。`
+          : `The audit for ${form.name || 'this target'} was interrupted by login requirements, platform protections, or runtime limits. The report preserves the real failure state instead of fabricating content.`,
+      visibilityLevel: 'low',
+      keyRisks:
+        locale === 'zh'
+          ? [
+              '本轮没有足够的真实回答可用于可信比较。',
+              failureNotes[0] || '至少一个目标平台未能完成真实检测。',
+              '如果此时继续输出竞品判断，会削弱整份报告的可信度。',
+            ]
+          : [
+              'This run did not capture enough live answers for a trustworthy comparison.',
+              failureNotes[0] || 'At least one target platform failed to complete a live check.',
+              'Continuing with fabricated competitor judgments here would reduce report credibility.',
+            ],
+      suggestions:
+        locale === 'zh'
+          ? [
+              '优先补齐登录态、自动化运行环境或截图抓取能力后再重跑。',
+              '当前只应展示真实失败状态和已有截图，不应伪造推荐排名。',
+              '待平台恢复后，再让 Agent 基于真实回答做综合判断。',
+            ]
+          : [
+              'Restore login state, browser automation support, or screenshot capture before rerunning.',
+              'At this point, only real failure states and any captured screenshots should be shown.',
+              'Once platforms recover, let the agent summarize only from live answers.',
+            ],
+      platformResults,
+    };
+  }
+
   const missingCount = answers.filter((item) => !item.mentionsTarget).length;
   const competitorNames = [...new Set(answers.flatMap((item) => item.competitors).filter(Boolean))].slice(0, 3);
   const context = getSubjectContext(form, locale);

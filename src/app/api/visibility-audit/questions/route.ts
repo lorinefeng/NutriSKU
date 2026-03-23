@@ -10,9 +10,13 @@ export async function POST(request: Request) {
     const body = (await request.json()) as { locale?: Locale; form?: Partial<IntakeForm> };
     const locale = body.locale === 'en' ? 'en' : 'zh';
     const form: IntakeForm = { ...defaultForm, ...(body.form || {}) };
+    const hasRequiredFields =
+      form.entityType === 'brand'
+        ? Boolean(form.name.trim() && form.industry.trim())
+        : Boolean(form.name.trim() && form.category.trim());
 
-    if (!form.name.trim() || !form.category.trim()) {
-      return NextResponse.json({ error: '缺少名称或品类' }, { status: 400 });
+    if (!hasRequiredFields) {
+      return NextResponse.json({ error: form.entityType === 'brand' ? '缺少品牌名称或所属行业' : '缺少名称或品类' }, { status: 400 });
     }
 
     const result = await generateQuestions(form, locale);
@@ -24,4 +28,3 @@ export async function POST(request: Request) {
     );
   }
 }
-

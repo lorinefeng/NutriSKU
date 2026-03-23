@@ -11,6 +11,7 @@ export type PlatformRawAnswer = {
   questionId: string;
   question: string;
   rawSnippet: string;
+  screenshotDataUrl?: string;
   links: string[];
 };
 
@@ -211,21 +212,54 @@ async function captureAnswerSnippet(page: any, beforeText: string) {
   return afterText.slice(-1600);
 }
 
-export async function auditPlatform(platform: PlatformName, questions: { id: string; question: string }[], form: IntakeForm, locale: Locale) {
-  const browser = await chromium.launch({
-    headless: true,
-    args: ['--disable-dev-shm-usage', '--no-sandbox'],
-  });
+async function captureAnswerScreenshot(page: any) {
+  try {
+    const body = page.locator('body');
+    if (await body.isVisible({ timeout: 1000 })) {
+      const buffer = await body.screenshot({
+        type: 'jpeg',
+        quality: 48,
+        scale: 'css',
+        timeout: 8000,
+      });
+      return `data:image/jpeg;base64,${buffer.toString('base64')}`;
+    }
+  } catch {
+    // ignore
+  }
 
-  const context = await browser.newContext({
-    viewport: { width: 1440, height: 900 },
-    locale: locale === 'zh' ? 'zh-CN' : 'en-US',
-    timezoneId: 'Asia/Shanghai',
-  });
+  try {
+    const buffer = await page.screenshot({
+      type: 'jpeg',
+      quality: 48,
+      fullPage: false,
+      scale: 'css',
+      timeout: 8000,
+    });
+    return `data:image/jpeg;base64,${buffer.toString('base64')}`;
+  } catch {
+    return undefined;
+  }
+}
+
+export async function auditPlatform(platform: PlatformName, questions: { id: string; question: string }[], form: IntakeForm, locale: Locale) {
+  let browser: Awaited<ReturnType<typeof chromium.launch>> | null = null;
+  let context: Awaited<ReturnType<Awaited<ReturnType<typeof chromium.launch>>['newContext']>> | null = null;
 
   const definition = getPlatformConfig(platform);
 
   try {
+    browser = await chromium.launch({
+      headless: true,
+      args: ['--disable-dev-shm-usage', '--no-sandbox'],
+    });
+
+    context = await browser.newContext({
+      viewport: { width: 1440, height: 900 },
+      locale: locale === 'zh' ? 'zh-CN' : 'en-US',
+      timezoneId: 'Asia/Shanghai',
+    });
+
     await applyCookies(context, definition).catch(() => 0);
     const page = await context.newPage();
     page.setDefaultTimeout(45000);
@@ -280,6 +314,7 @@ export async function auditPlatform(platform: PlatformName, questions: { id: str
         questionId: question.id,
         question: question.question,
         rawSnippet: (await captureAnswerSnippet(page, beforeText)) || (locale === 'zh' ? '未抓取到有效回答片段。' : 'No answer snippet was captured.'),
+        screenshotDataUrl: await captureAnswerScreenshot(page),
         links: await extractExternalLinks(page, definition.url),
       });
 
@@ -303,8 +338,7 @@ export async function auditPlatform(platform: PlatformName, questions: { id: str
       rawAnswers: [],
     } satisfies PlatformAuditRawResult;
   } finally {
-    await context.close().catch(() => {});
-    await browser.close().catch(() => {});
+    await context?.close().catch(() => {});
+    await browser?.close().catch(() => {});
   }
 }
-

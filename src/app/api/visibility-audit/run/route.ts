@@ -28,9 +28,13 @@ export async function POST(request: Request) {
     const locale = body.locale === 'en' ? 'en' : 'zh';
     const form: IntakeForm = { ...defaultForm, ...(body.form || {}) };
     const questions = Array.isArray(body.questions) ? body.questions.slice(0, 5) : [];
+    const hasRequiredFields =
+      form.entityType === 'brand'
+        ? Boolean(form.name.trim() && form.industry.trim())
+        : Boolean(form.name.trim() && form.category.trim());
 
-    if (!form.name.trim() || !form.category.trim()) {
-      return new Response(JSON.stringify({ error: '缺少名称或品类' }), { status: 400 });
+    if (!hasRequiredFields) {
+      return new Response(JSON.stringify({ error: form.entityType === 'brand' ? '缺少品牌名称或所属行业' : '缺少名称或品类' }), { status: 400 });
     }
     if (!questions.length) {
       return new Response(JSON.stringify({ error: '缺少选中的问题' }), { status: 400 });
@@ -101,4 +105,3 @@ export async function POST(request: Request) {
     );
   }
 }
-

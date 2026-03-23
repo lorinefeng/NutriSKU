@@ -48,19 +48,19 @@ export function Navbar() {
 
                 {/* Nav Links */}
                 <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--color-text-secondary)]">
-                    <Link href="#features" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
+                    <Link href="/#features" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
                         {t("nav.features")}
                     </Link>
-                    <Link href="#diagnosis" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
+                    <Link href="/#diagnosis" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
                         {t("nav.diagnosis")}
                     </Link>
-                    <Link href="#how-it-works" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
+                    <Link href="/#how-it-works" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
                         {t("nav.howItWorks")}
                     </Link>
-                    <Link href="#demo" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
+                    <Link href="/#demo" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
                         {t("nav.demo")}
                     </Link>
-                    <Link href="#showcase" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
+                    <Link href="/#showcase" className="hover-gold-border relative pb-1 hover:text-[var(--color-text-primary)] transition-colors">
                         {t("nav.showcase")}
                     </Link>
                 </div>
@@ -95,11 +95,11 @@ export function Navbar() {
                     >
                         {t("nav.login")}
                     </Link>
-                    <a href="#diagnosis">
+                    <Link href="/diagnosis">
                         <GlowButton variant="gold" size="sm">
                             {t("nav.getStarted")}
                         </GlowButton>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </nav>

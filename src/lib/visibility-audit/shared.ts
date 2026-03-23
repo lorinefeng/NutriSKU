@@ -35,6 +35,7 @@ export type PlatformAnswer = {
   questionId: string;
   question: string;
   rawSnippet: string;
+  screenshotDataUrl?: string;
   summary: string;
   mentionsTarget: boolean;
   competitors: string[];
@@ -539,6 +540,51 @@ export function buildFallbackAuditResult(form: IntakeForm, questions: QuestionIt
             'Prioritize authoritative review, Q&A, and scenario content that AI can index.',
           ],
     platformResults,
+  };
+}
+
+export function buildUnavailableAuditResult(form: IntakeForm, locale: Locale, reason?: string): AuditResult {
+  return {
+    headline:
+      locale === 'zh'
+        ? '本次未能完成真实平台检测，当前结果不能作为推荐结论使用。'
+        : 'This run did not complete live platform checks, so no recommendation conclusion should be trusted yet.',
+    subhead:
+      locale === 'zh'
+        ? `${form.name || '当前对象'} 的诊断链路被技术限制、登录要求或平台风控中断。我们保留真实失败状态，而不是伪造一份看起来完整的报告。`
+        : `The audit flow for ${form.name || 'this target'} was interrupted by technical limits, login requirements, or platform protections. We preserve the real failure state instead of fabricating a polished report.`,
+    visibilityLevel: 'low',
+    keyRisks:
+      locale === 'zh'
+        ? [
+            '本轮没有拿到足够的真实平台回答，无法做可信结论。',
+            reason || '浏览器自动化、平台登录态或运行环境存在限制。',
+            '如果强行输出推荐结论，会显著损害诊断可信度。',
+          ]
+        : [
+            'This run did not capture enough live platform answers for a reliable conclusion.',
+            reason || 'Browser automation, platform login state, or runtime support was limited.',
+            'Forcing a recommendation conclusion here would damage trust in the audit.',
+          ],
+    suggestions:
+      locale === 'zh'
+        ? [
+            '优先修复平台登录态和自动化环境，再重跑检测。',
+            '先用首页 GIF 演示和工作台案例解释检测逻辑，再给出正式报告。',
+            '报告中只展示真实截图、真实回答和明确的失败状态。',
+          ]
+        : [
+            'Fix platform login state and browser automation support before rerunning the audit.',
+            'Use the homepage GIF demos and product cases to explain the method before presenting a formal report.',
+            'Only show live screenshots, live answers, and explicit failure states in the report.',
+          ],
+    platformResults: (Object.keys(platformLabels) as PlatformName[]).map((platform) => ({
+      platform,
+      status: 'error',
+      completion: 100,
+      note: reason || (locale === 'zh' ? '当前未获取到真实平台结果。' : 'No live platform result was captured.'),
+      answers: [],
+    })),
   };
 }
 
