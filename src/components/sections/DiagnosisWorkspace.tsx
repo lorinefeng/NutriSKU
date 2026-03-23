@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -35,6 +36,12 @@ import {
   type QuestionsResponse,
   type StreamEvent,
 } from "@/lib/visibility-audit/shared";
+
+const platformLogos: Record<PlatformName, { src: string; alt: string }> = {
+  doubao: { src: "/doubao.png", alt: "Doubao" },
+  deepseek: { src: "/slides/deepseek.svg", alt: "DeepSeek" },
+  kimi: { src: "/Kimi.png", alt: "Kimi" },
+};
 
 const initialPlatforms = (Object.keys(platformLabels) as PlatformName[]).map((platform) => ({
   platform,
@@ -613,7 +620,17 @@ export function DiagnosisWorkspace() {
                         <div className="mb-3 flex items-center justify-between gap-3">
                           <div className="flex items-center gap-3">
                             <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(200,169,126,0.18)] bg-[rgba(200,169,126,0.08)] text-[#c8a97e]">
-                              {platform.status === "completed" ? <CheckCircle2 className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
+                              {platform.status === "completed" ? (
+                                <CheckCircle2 className="h-4 w-4" />
+                              ) : (
+                                <Image
+                                  src={platformLogos[platform.platform].src}
+                                  alt={platformLogos[platform.platform].alt}
+                                  width={18}
+                                  height={18}
+                                  className="h-4 w-auto object-contain"
+                                />
+                              )}
                             </div>
                             <div>
                               <div className="text-sm font-semibold text-[var(--color-text-primary)]">{label}</div>
@@ -690,7 +707,13 @@ export function DiagnosisWorkspace() {
                         <div className="mb-4 flex items-center justify-between gap-3">
                           <div className="flex items-center gap-3">
                             <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(200,169,126,0.18)] bg-[rgba(200,169,126,0.08)] text-[#c8a97e]">
-                              <Bot className="h-4 w-4" />
+                              <Image
+                                src={platformLogos[platform.platform].src}
+                                alt={platformLogos[platform.platform].alt}
+                                width={18}
+                                height={18}
+                                className="h-4 w-auto object-contain"
+                              />
                             </div>
                             <div>
                               <div className="text-sm font-semibold text-[var(--color-text-primary)]">{label}</div>

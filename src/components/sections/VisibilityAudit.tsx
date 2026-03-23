@@ -1,16 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Bot, PlayCircle, Radar } from "lucide-react";
+import { ArrowRight, PlayCircle, Radar } from "lucide-react";
 
 import { GlowButton } from "@/components/ui/GlowButton";
 import { useTranslation } from "@/lib/i18n";
 
 const platformGifs = [
-  { key: "doubao", labelZh: "豆包", labelEn: "Doubao", src: "/gifs/IMG_5711.gif" },
-  { key: "deepseek", labelZh: "DeepSeek", labelEn: "DeepSeek", src: "/gifs/IMG_5712.gif" },
-  { key: "kimi", labelZh: "Kimi", labelEn: "Kimi", src: "/gifs/IMG_5713.gif" },
+  { key: "doubao", labelZh: "豆包", labelEn: "Doubao", src: "/gifs/IMG_5712.gif", logo: "/doubao.png" },
+  { key: "deepseek", labelZh: "DeepSeek", labelEn: "DeepSeek", src: "/gifs/IMG_5711.gif", logo: "/slides/deepseek.svg" },
+  { key: "kimi", labelZh: "Kimi", labelEn: "Kimi", src: "/gifs/IMG_5713.gif", logo: "/Kimi.png" },
 ];
 
 export function VisibilityAudit() {
@@ -76,7 +77,7 @@ export function VisibilityAudit() {
             >
               <div className="mb-3 flex items-center justify-between gap-2">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(200,169,126,0.16)] px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-[#c8a97e]">
-                  <Bot className="h-3.5 w-3.5" />
+                  <Image src={platform.logo} alt={platform.labelEn} width={16} height={16} className="h-3.5 w-auto object-contain" />
                   {isZh ? platform.labelZh : platform.labelEn}
                 </div>
                 <span className="text-[10px] uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
